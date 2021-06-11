@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ import com.issler.patrick.QoSystem.metodos.GerarMfa;
 import com.issler.patrick.QoSystem.repository.ContaRepository;
 import com.issler.patrick.QoSystem.repository.PessoaRepository;
 
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/conta")
 public class ContaController {

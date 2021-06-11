@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.issler.patrick.QoSystem.entity.PedidoItem;
 import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
 
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("/pedidoItem")
 public class PedidoItemController {
