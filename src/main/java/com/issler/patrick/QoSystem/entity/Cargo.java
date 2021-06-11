@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -26,7 +28,8 @@ public class Cargo {
 	@NotNull
 	@Column(name = "cargo")
 	private String cargo;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cargo")
 	private List<Pessoa> pessoa;
 	

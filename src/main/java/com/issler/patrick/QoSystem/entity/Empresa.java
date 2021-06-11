@@ -14,6 +14,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -40,13 +42,13 @@ public class Empresa {
 	@NotNull
 	@OneToOne
 	private Endereco endereco; 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "empresa")
 	private List<Pessoa> pessoa;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "empresa")
 	private List<Cargo> cargo;
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "empresa")
 	private List<Item> item;
 

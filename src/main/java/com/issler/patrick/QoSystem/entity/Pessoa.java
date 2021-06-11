@@ -13,10 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 
@@ -36,6 +39,10 @@ public class Pessoa {
 	@CPF(message="cpf inválido")
 	@Column(name = "cpf")
 	private String cpf;
+	
+	@Email(message = "Email Inválido")
+	@Column(name = "email")
+	private String email;
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
@@ -63,6 +70,7 @@ public class Pessoa {
 	@OneToOne
 	private Endereco endereco; 
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Pedido> pedido;
 
@@ -80,6 +88,18 @@ public class Pessoa {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 
@@ -170,6 +190,7 @@ public class Pessoa {
 		result = prime * result + ((conta == null) ? 0 : conta.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
@@ -211,6 +232,11 @@ public class Pessoa {
 				return false;
 		} else if (!dataNascimento.equals(other.dataNascimento))
 			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
 		if (empresa == null) {
 			if (other.empresa != null)
 				return false;
@@ -249,9 +275,8 @@ public class Pessoa {
 		return true;
 	}
 
-	
-	
-	
+
+
 	
 	
 }

@@ -24,6 +24,9 @@ public class Conta {
 	@NotNull
 	@Column(name = "senha")
 	private String senha;
+	
+	@Column(name = "mfa")
+	private String mfa;
 
 	public Long getId() {
 		return id;
@@ -49,12 +52,21 @@ public class Conta {
 		this.senha = senha;
 	}
 
+	public String getMfa() {
+		return mfa;
+	}
+
+	public void setMfa(String mfa) {
+		this.mfa = mfa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((conta == null) ? 0 : conta.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((mfa == null) ? 0 : mfa.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
@@ -78,6 +90,11 @@ public class Conta {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (mfa == null) {
+			if (other.mfa != null)
+				return false;
+		} else if (!mfa.equals(other.mfa))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
@@ -85,8 +102,7 @@ public class Conta {
 			return false;
 		return true;
 	}
-	
-	
+
 	
 	
 }

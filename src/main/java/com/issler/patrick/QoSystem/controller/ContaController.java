@@ -1,4 +1,4 @@
-package com.issler.patrick.QoSystem.Controller;
+package com.issler.patrick.QoSystem.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,22 +13,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.issler.patrick.QoSystem.email.EnviaMfa;
 import com.issler.patrick.QoSystem.entity.Conta;
+import com.issler.patrick.QoSystem.entity.Pessoa;
+import com.issler.patrick.QoSystem.metodos.GerarMfa;
 import com.issler.patrick.QoSystem.repository.ContaRepository;
+import com.issler.patrick.QoSystem.repository.PessoaRepository;
 
 
 @RestController
+@RequestMapping("/conta")
 public class ContaController {
-    @Autowired
+	@Autowired
     private ContaRepository contaRepository;
+	@Autowired
+    private PessoaRepository pessoaRepository;
 
-    @RequestMapping(value = "/conta", method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public List<Conta> Get() {
         return contaRepository.findAll();
     }
 
-    @RequestMapping(value = "/conta/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/buscar/{id}", method = RequestMethod.GET)
     public ResponseEntity<Conta> GetById(@PathVariable(value = "id") long id)
     {
     	
@@ -38,14 +44,33 @@ public class ContaController {
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    
+    
+    
+    @RequestMapping(value = "/buscar/{conta}/{senha}", method = RequestMethod.GET)
+    public ResponseEntity<Conta> GetByContaAndSenha(@PathVariable(value = "conta") String conta, @PathVariable(value = "senha") String senha)
+    {
+        Optional<Conta> contaRetorno = contaRepository.findByContaAndSenha(conta, senha);
+        if(contaRetorno.isPresent()) {
+        	Optional<Pessoa> pessoaRetorno = pessoaRepository.findByConta(contaRetorno.get());
+        	if(pessoaRetorno.isPresent()) {
+        		contaRetorno.get().setMfa(GerarMfa.gerarMfa().toUpperCase());
+        		EnviaMfa.notificaPorEmail(contaRetorno.get().getMfa(), pessoaRetorno.get());
+        	}
+            return new ResponseEntity<Conta>(contaRetorno.get(), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
-    @RequestMapping(value = "/conta", method =  RequestMethod.POST)
+    @RequestMapping(value = "/cadastrar", method =  RequestMethod.POST)
     public Conta Post(@Valid @RequestBody Conta conta)
     {
         return contaRepository.save(conta);
     }
 
-    @RequestMapping(value = "/conta/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/deletar/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id)
     {
         Optional<Conta> conta= contaRepository.findById(id);
