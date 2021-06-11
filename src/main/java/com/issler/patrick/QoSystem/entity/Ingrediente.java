@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 
@@ -20,11 +22,11 @@ public class Ingrediente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-
+	@NotNull
 	@Column(name = "nome")
 	private String nome;
 	
-
+	@NotNull
 	@Column(name = "valor")
 	private double valor;
 	

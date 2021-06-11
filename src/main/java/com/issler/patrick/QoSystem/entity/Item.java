@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 
@@ -22,9 +24,11 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	@Column(name = "nome")
 	private String nome;
 	
+	@NotNull
 	@Column(name = "valor")
 	private double valor;
 	

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 
@@ -21,12 +23,14 @@ public class Cargo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotNull
 	@Column(name = "cargo")
 	private String cargo;
 
 	@OneToMany(mappedBy = "cargo")
 	private List<Pessoa> pessoa;
 	
+	@NotNull
 	@ManyToOne
 	private Empresa empresa;
 

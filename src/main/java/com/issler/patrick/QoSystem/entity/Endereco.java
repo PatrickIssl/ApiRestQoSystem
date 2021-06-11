@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 
@@ -16,18 +18,23 @@ public class Endereco {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Column(name = "rua")
 	private String rua;
 	
+	@NotNull
 	@Column(name = "bairro")
 	private String bairro;
 	
+	@NotNull
 	@Column(name = "numero")
 	private String numero;
 	
+	@NotNull
 	@Column(name = "uf")
 	private String uf;
 	
+	@NotNull
 	@Column(name = "pais")
 	private String pais;
 	

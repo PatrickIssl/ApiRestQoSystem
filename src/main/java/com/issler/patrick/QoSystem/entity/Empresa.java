@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.stereotype.Component;
@@ -23,16 +24,20 @@ public class Empresa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Column(name = "razaoSocial")
 	private String razaoSocial;
 	
+	@NotNull
 	@Column(name = "telefone")
 	private String telefone;
 
+	@NotNull
 	@CNPJ(message="cnpj inválido")
 	@Column(name = "cnpj")
 	private String cnpj;
 	
+	@NotNull
 	@OneToOne
 	private Endereco endereco; 
 	

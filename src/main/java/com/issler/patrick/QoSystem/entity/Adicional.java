@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.stereotype.Component;
 
 
@@ -20,12 +22,15 @@ public class Adicional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@ManyToOne
 	private PedidoItem pedidoItem;
 	
+	@NotNull
 	@Column(name = "quantidade")
 	private int  quantidade;
 	
+	@NotNull
 	@ManyToOne
 	private Ingrediente ingrediente;
 

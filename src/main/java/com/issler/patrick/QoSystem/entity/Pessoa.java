@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.stereotype.Component;
@@ -27,23 +28,29 @@ public class Pessoa {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotNull
 	@Column(name = "nome")
 	private String nome;
 	
+	@NotNull
 	@CPF(message="cpf inválido")
 	@Column(name = "cpf")
 	private String cpf;
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dataNascimento")
 	private Date dataNascimento;
 	
+	@NotNull
 	@Column(name = "genero")
 	private String genero;
 	
+	@NotNull
 	@Column(name = "telefone")
 	private String telefone;
 
+	@NotNull
 	@OneToOne
 	private Conta conta;
 	
