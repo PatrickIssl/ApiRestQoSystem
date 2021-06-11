@@ -40,7 +40,7 @@ public class Pedido {
 	@ManyToOne
 	private Pessoa pessoa;
 
-	@OneToMany(mappedBy = "pedidoItem")
+	@OneToMany(mappedBy = "pedido")
 	private List<PedidoItem> pedidoItem;
 
 	public Long getId() {

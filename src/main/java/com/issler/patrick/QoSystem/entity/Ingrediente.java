@@ -28,10 +28,10 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private double valor;
 	
-	@OneToMany(mappedBy = "adicional")
+	@OneToMany(mappedBy = "ingrediente")
 	private List<Adicional> adicional;
 	
-	@OneToMany(mappedBy = "itemIngrediente")
+	@OneToMany(mappedBy = "ingrediente")
 	private List<ItemIngrediente> itemIngrediente;
 
 	public Long getId() {

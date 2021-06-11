@@ -24,7 +24,7 @@ public class Cargo {
 	@Column(name = "cargo")
 	private String cargo;
 
-	@OneToMany(mappedBy = "Pessoa")
+	@OneToMany(mappedBy = "cargo")
 	private List<Pessoa> pessoa;
 	
 	@ManyToOne

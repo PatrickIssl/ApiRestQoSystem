@@ -28,10 +28,10 @@ public class Item {
 	@Column(name = "valor")
 	private double valor;
 	
-	@OneToMany(mappedBy = "itemIngrediente")
+	@OneToMany(mappedBy = "item")
 	private List<ItemIngrediente> itemIngrediente;
 
-	@OneToMany(mappedBy = "pedidoItem")
+	@OneToMany(mappedBy = "item")
 	private List<PedidoItem> pedidoItem;
 
 	@ManyToOne

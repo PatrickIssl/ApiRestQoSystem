@@ -36,13 +36,13 @@ public class Empresa {
 	@OneToOne
 	private Endereco endereco; 
 	
-	@OneToMany(mappedBy = "pessoa")
+	@OneToMany(mappedBy = "empresa")
 	private List<Pessoa> pessoa;
 	
-	@OneToMany(mappedBy = "cargo")
+	@OneToMany(mappedBy = "empresa")
 	private List<Cargo> cargo;
 	
-	@OneToMany(mappedBy = "item")
+	@OneToMany(mappedBy = "empresa")
 	private List<Item> item;
 
 	public Long getId() {
