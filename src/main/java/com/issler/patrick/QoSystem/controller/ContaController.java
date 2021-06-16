@@ -27,8 +27,6 @@ import com.issler.patrick.QoSystem.repository.PessoaRepository;
 public class ContaController {
 	@Autowired
     private ContaRepository contaRepository;
-	@Autowired
-    private PessoaRepository pessoaRepository;
 
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public List<Conta> Get() {
@@ -46,23 +44,6 @@ public class ContaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    
-    
-    @RequestMapping(value = "/buscar/{conta}/{senha}", method = RequestMethod.GET)
-    public ResponseEntity<Conta> GetByContaAndSenha(@PathVariable(value = "conta") String conta, @PathVariable(value = "senha") String senha)
-    {
-        Optional<Conta> contaRetorno = contaRepository.findByContaAndSenha(conta, senha);
-        if(contaRetorno.isPresent()) {
-        	Optional<Pessoa> pessoaRetorno = pessoaRepository.findByConta(contaRetorno.get());
-        	if(pessoaRetorno.isPresent()) {
-        		contaRetorno.get().setMfa(GerarMfa.gerarMfa().toUpperCase());
-        		EnviaMfa.notificaPorEmail(contaRetorno.get().getMfa(), pessoaRetorno.get());
-        	}
-            return new ResponseEntity<Conta>(contaRetorno.get(), HttpStatus.OK);
-        }else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
     
 
     @RequestMapping(value = "/cadastrar", method =  RequestMethod.POST)
