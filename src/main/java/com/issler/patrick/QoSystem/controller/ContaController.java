@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.issler.patrick.QoSystem.email.EnviaMfa;
 import com.issler.patrick.QoSystem.entity.Conta;
-import com.issler.patrick.QoSystem.entity.Pessoa;
-import com.issler.patrick.QoSystem.metodos.GerarMfa;
 import com.issler.patrick.QoSystem.repository.ContaRepository;
-import com.issler.patrick.QoSystem.repository.PessoaRepository;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -44,7 +40,16 @@ public class ContaController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    
+    @RequestMapping(value = "/buscar/{conta}/{senha}", method = RequestMethod.GET)
+    public ResponseEntity<Conta> GetByContaAndSenha(@PathVariable(value = "conta") String conta, @PathVariable(value = "senha") String senha)
+    {
+        Optional<Conta> contaRetorno = contaRepository.findByContaAndSenha(conta, senha);
+        if(contaRetorno.isPresent()) {
+            return new ResponseEntity<Conta>(contaRetorno.get(), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
     @RequestMapping(value = "/cadastrar", method =  RequestMethod.POST)
     public Conta Post(@Valid @RequestBody Conta conta)

@@ -29,7 +29,7 @@ public class PessoaController {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-	@Autowired
+    @Autowired
     private ContaRepository contaRepository;
     
     @RequestMapping(value = "/listar", method = RequestMethod.GET)
