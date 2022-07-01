@@ -103,8 +103,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -124,7 +124,20 @@
     <artifactId>validation-api</artifactId>
     <version>1.1.0.Final</version>
 </dependency>
+
+<!-- dependencias do telegram -->
+
+	<dependency>
+		<groupId>org.telegram</groupId>
+		<artifactId>telegrambots</artifactId>
+		<version>5.3.0</version>
+	</dependency>
+
+<!-- FIM dependencias do telegram -->
 	</dependencies>
+	
+	
+	
 
 
 	<build>
