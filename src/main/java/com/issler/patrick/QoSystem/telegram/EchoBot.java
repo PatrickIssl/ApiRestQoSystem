@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import com.issler.patrick.QoSystem.entity.BotData;
+import com.issler.patrick.QoSystem.entity.Resposta;
 
 public class EchoBot extends TelegramLongPollingBot {
 	
@@ -38,12 +39,19 @@ public class EchoBot extends TelegramLongPollingBot {
     private SendMessage responder(Update update) {
     	MessageCreator messageCreator = new MessageCreator();
         String chatId = update.getMessage().getChatId().toString();
-        String resposta = messageCreator.message(update);
-        
-        return SendMessage.builder()
-                .text(resposta)
-                .chatId(chatId)
-                .build();
+        Resposta resposta = messageCreator.message(update);
+        if(resposta.getKeyboard() != null) {
+            return SendMessage.builder()
+                    .text(resposta.getText())
+                    .chatId(chatId)
+                    .replyMarkup(resposta.getKeyboard())
+                    .build();
+        }else {
+            return SendMessage.builder()
+                    .text(resposta.getText())
+                    .chatId(chatId)
+                    .build();
+        }
     }
 
 
