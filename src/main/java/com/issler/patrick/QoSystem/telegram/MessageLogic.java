@@ -12,6 +12,7 @@ public class MessageLogic {
 	public Resposta newUser(TelegramUser usuario, Update update) {
 		Resposta resposta = new Resposta(); 
 		String textoMensagem = update.getMessage().getText().toLowerCase();
+		TelegramMenu telegramMenu = new TelegramMenu();
 		switch (usuario.getPasso()) {
 		case 1:
 			usuario.setName(textoMensagem);
@@ -34,7 +35,30 @@ public class MessageLogic {
 			telegramDataBase.editUserById(usuario.getId().toString(), "number", "'"+usuario.getNumber()+"'");
 			telegramDataBase.editUserById(usuario.getId().toString(), "passo", "'"+usuario.getPasso()+"'");
 			telegramDataBase.editUserById(usuario.getId().toString(), "registration_completed", "True");
-			resposta.setText("Cadastro concluido com sucesso!");
+			resposta.setText("Cadastro Concluido com sucesso!\n\n"+telegramMenu.menuZero(usuario, update).getText());
+			resposta.setKeyboard(telegramMenu.menuZero(usuario, update).getKeyboard());
+			break;
+		case 41:
+			telegramDataBase.editUserById(usuario.getId().toString(), "passo", "'0'");
+			telegramDataBase.editUserById(usuario.getId().toString(), "registration_completed", "True");
+			telegramDataBase.editUserById(usuario.getId().toString(), "name", "'"+textoMensagem+"'");
+			resposta.setText("Alteração no nome realizada com sucesso!\n\n"+telegramMenu.menuZero(usuario, update).getText());
+			resposta.setKeyboard(telegramMenu.menuZero(usuario, update).getKeyboard());
+			break;
+		case 42:
+			
+			telegramDataBase.editUserById(usuario.getId().toString(), "passo", "'0'");
+			telegramDataBase.editUserById(usuario.getId().toString(), "registration_completed", "True");
+			telegramDataBase.editUserById(usuario.getId().toString(), "number", "'"+textoMensagem+"'");
+			resposta.setText("Alteração no telefone realizada com sucesso!\n\n"+telegramMenu.menuZero(usuario, update).getText());
+			resposta.setKeyboard(telegramMenu.menuZero(usuario, update).getKeyboard());
+			break;
+		case 43:
+			telegramDataBase.editUserById(usuario.getId().toString(), "passo", "'0'");
+			telegramDataBase.editUserById(usuario.getId().toString(), "registration_completed", "True");
+			telegramDataBase.editUserById(usuario.getId().toString(), "adress", "'"+textoMensagem+"'");
+			resposta.setText("Alteração no endereço realizada com sucesso!\n\n"+telegramMenu.menuZero(usuario, update).getText());
+			resposta.setKeyboard(telegramMenu.menuZero(usuario, update).getKeyboard());
 			break;
 		}
 		
