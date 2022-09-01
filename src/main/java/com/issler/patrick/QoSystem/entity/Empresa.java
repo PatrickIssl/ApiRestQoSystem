@@ -1,188 +1,47 @@
 package com.issler.patrick.QoSystem.entity;
 
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.br.CNPJ;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
-
+@Table(name = "empresa")
 @Entity
 @Component
+@Getter @Setter @NoArgsConstructor
 public class Empresa {	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotNull
-	@Column(name = "razaoSocial")
+	@Column(name = "razao_social", length = 255)
 	private String razaoSocial;
 	
 	@NotNull
-	@Column(name = "telefone")
+	@Column(name = "telefone", length = 20)
 	private String telefone;
-
+	
 	@NotNull
-	@CNPJ(message="cnpj inválido")
-	@Column(name = "cnpj")
+	@Column(name = "cnpj", length = 30)
 	private String cnpj;
 	
-	@NotNull
-	@OneToOne
-	private Endereco endereco; 
-	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
-	private List<Pessoa> pessoa;
-	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
-	private List<Cargo> cargo;
-	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
-	private List<Item> item;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public Endereco getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public List<Pessoa> getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(List<Pessoa> pessoa) {
-		this.pessoa = pessoa;
-	}
-
-	public List<Cargo> getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(List<Cargo> cargo) {
-		this.cargo = cargo;
-	}
-
-	public List<Item> getItem() {
-		return item;
-	}
-
-	public void setItem(List<Item> item) {
-		this.item = item;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cargo == null) ? 0 : cargo.hashCode());
-		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((item == null) ? 0 : item.hashCode());
-		result = prime * result + ((pessoa == null) ? 0 : pessoa.hashCode());
-		result = prime * result + ((razaoSocial == null) ? 0 : razaoSocial.hashCode());
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Empresa other = (Empresa) obj;
-		if (cargo == null) {
-			if (other.cargo != null)
-				return false;
-		} else if (!cargo.equals(other.cargo))
-			return false;
-		if (cnpj == null) {
-			if (other.cnpj != null)
-				return false;
-		} else if (!cnpj.equals(other.cnpj))
-			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
-				return false;
-		} else if (!endereco.equals(other.endereco))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (item == null) {
-			if (other.item != null)
-				return false;
-		} else if (!item.equals(other.item))
-			return false;
-		if (pessoa == null) {
-			if (other.pessoa != null)
-				return false;
-		} else if (!pessoa.equals(other.pessoa))
-			return false;
-		if (razaoSocial == null) {
-			if (other.razaoSocial != null)
-				return false;
-		} else if (!razaoSocial.equals(other.razaoSocial))
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
-			return false;
-		return true;
-	}
-	
-	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	private Endereco endereco;
 	
 }
