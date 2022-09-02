@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issler.patrick.QoSystem.entity.Item;
-import com.issler.patrick.QoSystem.service.ItemService;
+import com.issler.patrick.QoSystem.entity.Endereco;
+import com.issler.patrick.QoSystem.service.EnderecoService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/endereco")
+public class EnderecoController {
 
 	@Autowired
-	private ItemService service;
+	private EnderecoService service;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ResponseEntity<?> Get() {
@@ -27,17 +27,17 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
-	public ResponseEntity<?> GetById(@RequestBody Item item) {
-		return service.buscar(item);
+	public ResponseEntity<?> GetById(@RequestBody Endereco endereco) {
+		return service.buscar(endereco);
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Item item) {
-		return service.save(item);
+	public ResponseEntity<?> Post(@Valid @RequestBody Endereco endereco) {
+		return service.save(endereco);
 	}
 
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
-	public ResponseEntity<?> Delete(@Valid @RequestBody Item item) {
-		return service.delete(item);
+	public ResponseEntity<?> Delete(@Valid @RequestBody Endereco endereco) {
+		return service.delete(endereco);
 	}
 }

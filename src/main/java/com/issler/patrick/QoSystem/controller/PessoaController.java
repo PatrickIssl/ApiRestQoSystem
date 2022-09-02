@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.issler.patrick.QoSystem.entity.Item;
-import com.issler.patrick.QoSystem.service.ItemService;
+import com.issler.patrick.QoSystem.entity.Pessoa;
+import com.issler.patrick.QoSystem.service.PessoaService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/pessoa")
+public class PessoaController {
 
 	@Autowired
-	private ItemService service;
+	private PessoaService service;
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ResponseEntity<?> Get() {
@@ -27,17 +27,17 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
-	public ResponseEntity<?> GetById(@RequestBody Item item) {
-		return service.buscar(item);
+	public ResponseEntity<?> GetById(@RequestBody Pessoa pessoa) {
+		return service.buscar(pessoa);
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Item item) {
-		return service.save(item);
+	public ResponseEntity<?> Post(@Valid @RequestBody Pessoa pessoa) {
+		return service.save(pessoa);
 	}
 
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
-	public ResponseEntity<?> Delete(@Valid @RequestBody Item item) {
-		return service.delete(item);
+	public ResponseEntity<?> Delete(@Valid @RequestBody Pessoa pessoa) {
+		return service.delete(pessoa);
 	}
 }
