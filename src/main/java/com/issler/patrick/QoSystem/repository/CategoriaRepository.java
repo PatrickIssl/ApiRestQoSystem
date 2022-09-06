@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.issler.patrick.QoSystem.entity.Categoria;
-import com.issler.patrick.QoSystem.entity.Item;
+import com.issler.patrick.QoSystem.entity.Empresa;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Long> {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-	List<Item> findAllByCategoria(Categoria categoria);
+	List<Categoria> findAllByEmpresa(Empresa empresa);
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Item;
 import com.issler.patrick.QoSystem.service.ItemService;
 
@@ -40,4 +41,10 @@ public class ItemController {
 	public ResponseEntity<?> Delete(@Valid @RequestBody Item item) {
 		return service.delete(item);
 	}
+
+	@RequestMapping(value = "/buscar/categoria", method = RequestMethod.GET)
+	public ResponseEntity<?> FindALL(@RequestBody Categoria categoria) {
+		return service.findAllByCategoria(categoria);
+	}
+
 }

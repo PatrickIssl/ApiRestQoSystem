@@ -1,5 +1,7 @@
 package com.issler.patrick.QoSystem.controller;
 
+import java.util.Optional;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +38,18 @@ public class ContaController {
 		return service.save(conta);
 	}
 
+	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
+	public ResponseEntity<?> Put(@Valid @RequestBody Conta conta) {
+		return service.put(conta);
+	}
+
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
 	public ResponseEntity<?> Delete(@Valid @RequestBody Conta conta) {
 		return service.delete(conta);
+	}
+
+	@RequestMapping(value = "/recuperar", method = RequestMethod.POST)
+	public ResponseEntity<?> recuperar(@Valid @RequestBody Optional<Conta> conta) {
+		return service.recuperar(conta);
 	}
 }
