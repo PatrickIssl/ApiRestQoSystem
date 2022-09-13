@@ -10,8 +10,8 @@ import com.issler.patrick.QoSystem.entity.Conta;
 @Repository
 public interface ContaRepository extends JpaRepository<Conta, Long> {
 
-	List<Conta> findAllByContaAndSenha(String conta, String senha);
+	List<Conta> findAllByContaAndSenhaIgnoreCase(String conta, String senha);
 
-	List<Conta> findAllByConta(String conta);
+	List<Conta> findAllByContaIgnoreCase(String conta);
 
 }

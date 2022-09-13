@@ -30,7 +30,7 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> buscar(Conta conta) {
-		List<Conta> contas = contaRepository.findAllByContaAndSenha(conta.getConta(), conta.getSenha());
+		List<Conta> contas = contaRepository.findAllByContaAndSenhaIgnoreCase(conta.getConta(), conta.getSenha());
 		if (!contas.isEmpty()) {
 			return new ResponseEntity<>(contas, HttpStatus.OK);
 		} else {
@@ -39,7 +39,7 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> save(Conta contas) {
-		if (!contaRepository.findAllByConta(contas.getConta()).isEmpty()) {
+		if (!contaRepository.findAllByContaIgnoreCase(contas.getConta()).isEmpty()) {
 			return new ResponseEntity<>("Email já está em uso", HttpStatus.BAD_REQUEST);
 		}
 		contaRepository.save(contas);
