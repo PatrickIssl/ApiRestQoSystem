@@ -1,5 +1,6 @@
 package com.issler.patrick.QoSystem.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,18 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> buscar(Conta conta) {
-		Optional<Conta> contas = contaRepository.findById(conta.getId());
-		if (contas.isPresent()) {
-			return new ResponseEntity<Conta>(contas.get(), HttpStatus.OK);
+		List<Conta> contas = contaRepository.findAllByContaAndSenha(conta.getConta(), conta.getSenha());
+		if (!contas.isEmpty()) {
+			return new ResponseEntity<>(contas, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Conta não encontrado", HttpStatus.NOT_FOUND);
 		}
 	}
 
 	public ResponseEntity<?> save(Conta contas) {
+		if (!contaRepository.findAllByConta(contas.getConta()).isEmpty()) {
+			return new ResponseEntity<>("Email já está em uso", HttpStatus.BAD_REQUEST);
+		}
 		contaRepository.save(contas);
 		return new ResponseEntity<Conta>(contas, HttpStatus.OK);
 	}
