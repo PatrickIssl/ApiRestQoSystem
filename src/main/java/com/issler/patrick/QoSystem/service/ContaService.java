@@ -30,7 +30,7 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> buscar(Conta conta) {
-		List<Conta> contas = contaRepository.findAllByContaAndSenhaIgnoreCase(conta.getConta(), conta.getSenha());
+		List<Conta> contas = contaRepository.findAllByContaIgnoreCaseAndSenha(conta.getConta(), conta.getSenha());
 		if (!contas.isEmpty()) {
 			return new ResponseEntity<>(contas, HttpStatus.OK);
 		} else {
