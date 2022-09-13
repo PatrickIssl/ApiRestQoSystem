@@ -27,12 +27,12 @@ public class CategoriaController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Categoria categoria) {
 		return service.buscar(categoria);
 	}
 
-	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
 	public ResponseEntity<?> FindALL(@RequestBody Empresa empresa) {
 		return service.findAllByEmpresa(empresa);
 	}

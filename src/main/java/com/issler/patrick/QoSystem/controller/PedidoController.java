@@ -26,7 +26,7 @@ public class PedidoController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Pedido pedido) {
 		return service.buscar(pedido);
 	}

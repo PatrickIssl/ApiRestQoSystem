@@ -26,7 +26,7 @@ public class PessoaController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Pessoa pessoa) {
 		return service.buscar(pessoa);
 	}

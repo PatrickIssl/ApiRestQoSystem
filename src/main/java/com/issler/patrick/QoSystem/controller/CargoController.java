@@ -26,7 +26,7 @@ public class CargoController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Cargo cargo) {
 		return service.buscar(cargo);
 	}

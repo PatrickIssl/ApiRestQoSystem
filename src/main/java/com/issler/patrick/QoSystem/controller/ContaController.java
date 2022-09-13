@@ -28,7 +28,7 @@ public class ContaController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Conta conta) {
 		return service.buscar(conta);
 	}

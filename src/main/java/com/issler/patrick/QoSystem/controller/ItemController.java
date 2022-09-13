@@ -27,7 +27,7 @@ public class ItemController {
 		return service.findAll();
 	}
 
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
 	public ResponseEntity<?> GetById(@RequestBody Item item) {
 		return service.buscar(item);
 	}
@@ -42,7 +42,7 @@ public class ItemController {
 		return service.delete(item);
 	}
 
-	@RequestMapping(value = "/buscar/categoria", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar/categoria", method = RequestMethod.POST)
 	public ResponseEntity<?> FindALL(@RequestBody Categoria categoria) {
 		return service.findAllByCategoria(categoria);
 	}
