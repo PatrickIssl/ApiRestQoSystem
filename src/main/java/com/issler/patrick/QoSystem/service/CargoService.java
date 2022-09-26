@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Cargo;
-import com.issler.patrick.QoSystem.repository.CargoRepository;
+import com.issler.patrick.QoSystem.controller.repository.CargoRepository;
 
 @Service
 public class CargoService {

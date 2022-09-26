@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Conta;
-import com.issler.patrick.QoSystem.repository.ContaRepository;
+import com.issler.patrick.QoSystem.controller.repository.ContaRepository;
 
 import net.bytebuddy.utility.RandomString;
 

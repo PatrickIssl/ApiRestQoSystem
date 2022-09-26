@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Table(name = "pessoa")
 @Entity
@@ -40,8 +41,14 @@ public class Pessoa {
 	
 	@Column(length = 20, name = "telefone")
 	private String telefone;
-	
-    @OneToOne(cascade=CascadeType.ALL)
+
+	@Column(name = "imageUrl")
+	private String imageUrl;
+
+	@Transient
+	private MultipartFile imagem;
+
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "conta_id")
 	private Conta conta;
 

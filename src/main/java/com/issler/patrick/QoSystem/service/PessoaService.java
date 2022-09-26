@@ -2,14 +2,13 @@ package com.issler.patrick.QoSystem.service;
 
 import java.util.Optional;
 
-import com.issler.patrick.QoSystem.entity.Conta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Pessoa;
-import com.issler.patrick.QoSystem.repository.PessoaRepository;
+import com.issler.patrick.QoSystem.controller.repository.PessoaRepository;
 
 @Service
 public class PessoaService {

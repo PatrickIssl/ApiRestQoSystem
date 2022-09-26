@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,10 +30,12 @@ public class Item {
 	@Column(name = "valor")
 	private double valor;
 
-	@Nullable
-	@Lob
-	@Column(name = "imagem")
-	private byte[] imagem;
+
+	@Column(name = "imageUrl")
+	private String imageUrl;
+
+	@Transient
+	private MultipartFile imagem;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")

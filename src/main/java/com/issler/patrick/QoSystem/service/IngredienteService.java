@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Ingrediente;
-import com.issler.patrick.QoSystem.repository.IngredienteRepository;
+import com.issler.patrick.QoSystem.controller.repository.IngredienteRepository;
 
 @Service
 public class IngredienteService {
