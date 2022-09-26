@@ -3,6 +3,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -32,6 +33,7 @@ public class PedidoItem {
 	@JoinColumn(name = "item_id")
 	private Item item;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoItem")
 	private List<Adicional> adicionais;
 }

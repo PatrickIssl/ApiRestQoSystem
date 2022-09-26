@@ -42,4 +42,7 @@ public class Item {
 	@OneToMany(mappedBy = "item")
 	private List<PedidoItem> pedidoItems;
 
+	@ManyToMany(mappedBy = "items")
+	private List<Ingrediente> ingredientes;
+
 }

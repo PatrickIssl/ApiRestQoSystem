@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -40,6 +41,7 @@ public class Conta {
 	@Transient
 	private String mfa;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "conta")
 	private Pessoa pessoa;
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -43,7 +44,8 @@ public class Pessoa {
     @OneToOne()
 	@JoinColumn(name = "conta_id")
 	private Conta conta;
-    
+
+
     @ManyToOne()
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
@@ -52,7 +54,7 @@ public class Pessoa {
     @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "pessoa")
 	private List<Pedido> pedidos;
 

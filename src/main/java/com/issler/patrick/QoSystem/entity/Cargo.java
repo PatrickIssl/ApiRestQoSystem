@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -25,11 +26,12 @@ public class Cargo {
 	@Column(name = "nome")
 	private String nome;
 
+
 	@ManyToOne()
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "cargo")
 	private List<Pessoa> pessoas;
 

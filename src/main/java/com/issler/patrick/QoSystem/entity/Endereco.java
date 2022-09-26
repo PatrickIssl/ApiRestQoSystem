@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -44,9 +45,11 @@ public class Endereco {
 	@Column(name = "observacao", length = 155)
 	private String observacao;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "endereco")
 	private Pessoa pessoa;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "endereco")
 	private Empresa empresa;
 
