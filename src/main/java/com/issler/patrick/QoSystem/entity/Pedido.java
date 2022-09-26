@@ -1,19 +1,15 @@
 package com.issler.patrick.QoSystem.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Table(name = "pedido")
 @Entity
@@ -41,7 +37,11 @@ public class Pedido {
 	private String enderecoEntrega;
 	
     @ManyToOne()
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
-    
-	
+
+
+	@OneToMany(mappedBy = "pedido")
+	private List<PedidoItem> pedidoItems;
+
 }

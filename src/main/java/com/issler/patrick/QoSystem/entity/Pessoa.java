@@ -2,17 +2,9 @@ package com.issler.patrick.QoSystem.entity;
 
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
@@ -38,21 +30,30 @@ public class Pessoa {
 	
 	@Column( name = "data_nascimento")
 	private Date dataNascimento;
-	
+
+	@Column( name = "salario")
+	private Double salario;
+
 	@Column(length = 60, name = "genero")
 	private String genero;
 	
 	@Column(length = 20, name = "telefone")
 	private String telefone;
 	
-    @OneToOne(mappedBy = "pessoa")
+    @OneToOne()
+	@JoinColumn(name = "conta_id")
 	private Conta conta;
     
     @ManyToOne()
+	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
     
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+	@OneToOne()
+    @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
-	
+
+
+	@OneToMany(mappedBy = "pessoa")
+	private List<Pedido> pedidos;
+
 }

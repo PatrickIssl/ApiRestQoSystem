@@ -3,13 +3,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
@@ -24,16 +18,22 @@ import lombok.Setter;
 public class Ingrediente {	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 255, name = "nome")
+	@Column( name = "nome")
 	private String nome;
 	
 	@Column(name = "valor")
 	private Double valor;
 
 	@ManyToMany
-    List<Item> items;
-	
+	@JoinTable(name = "ingrediente_item",
+			joinColumns = @JoinColumn(name = "ingrediente_id"),
+			inverseJoinColumns = @JoinColumn(name = "item_id"))
+    private List<Item> items;
+
+	@OneToMany(mappedBy = "ingrediente")
+	private List<Adicional> adicionais;
+
 }

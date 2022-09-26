@@ -1,18 +1,14 @@
 package com.issler.patrick.QoSystem.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Table(name = "cargo")
 @Entity
@@ -23,13 +19,18 @@ import lombok.Setter;
 public class Cargo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "nome")
 	private String nome;
 
 	@ManyToOne()
+	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
+
+
+	@OneToMany(mappedBy = "cargo")
+	private List<Pessoa> pessoas;
 
 }

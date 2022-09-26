@@ -27,7 +27,7 @@ import lombok.Setter;
 public class Conta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "conta")
@@ -40,8 +40,7 @@ public class Conta {
 	@Transient
 	private String mfa;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "conta")
 	private Pessoa pessoa;
 
 }
