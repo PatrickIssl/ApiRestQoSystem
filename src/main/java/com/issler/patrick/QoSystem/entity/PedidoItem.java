@@ -25,15 +25,15 @@ public class PedidoItem {
 	@Column(name = "quantidade")
 	private int quantidade;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "item_id")
 	private Item item;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedidoItem")
+	@OneToMany(mappedBy = "pedidoItem", cascade = CascadeType.ALL)
 	private List<Adicional> adicionais;
 }

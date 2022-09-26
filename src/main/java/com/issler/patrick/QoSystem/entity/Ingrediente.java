@@ -19,7 +19,7 @@ import lombok.Setter;
 public class Ingrediente {	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column( name = "nome")
@@ -28,14 +28,14 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private Double valor;
 
-	@ManyToMany
+	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),
 			inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "ingrediente")
+	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL)
 	private List<Adicional> adicionais;
 
 }

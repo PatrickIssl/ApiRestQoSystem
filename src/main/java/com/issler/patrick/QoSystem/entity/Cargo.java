@@ -20,19 +20,19 @@ import java.util.List;
 public class Cargo {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "nome")
 	private String nome;
 
 
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cargo")
+	@OneToMany(mappedBy = "cargo", cascade=CascadeType.ALL)
 	private List<Pessoa> pessoas;
 
 }

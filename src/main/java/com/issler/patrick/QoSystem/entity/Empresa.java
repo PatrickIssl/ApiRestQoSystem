@@ -21,7 +21,7 @@ import java.util.List;
 public class Empresa {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "razao_social")
@@ -33,16 +33,16 @@ public class Empresa {
 	@Column(name = "cnpj", length = 30)
 	private String cnpj;
 
-	@OneToOne()
+	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
+	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
 	private List<Cargo> cargos;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa")
+	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
 	private List<Categoria> categorias;
 
 }

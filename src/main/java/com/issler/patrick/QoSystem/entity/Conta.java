@@ -28,7 +28,7 @@ import lombok.Setter;
 public class Conta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "conta")
@@ -42,7 +42,7 @@ public class Conta {
 	private String mfa;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "conta")
+	@OneToOne(mappedBy = "conta", cascade=CascadeType.ALL)
 	private Pessoa pessoa;
 
 }

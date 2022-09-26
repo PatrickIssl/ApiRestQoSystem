@@ -41,16 +41,16 @@ public class Pessoa {
 	@Column(length = 20, name = "telefone")
 	private String telefone;
 	
-    @OneToOne()
+    @OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "conta_id")
 	private Conta conta;
 
 
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
     
-	@OneToOne()
+	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 

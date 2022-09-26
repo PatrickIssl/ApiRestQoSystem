@@ -16,17 +16,17 @@ import lombok.Setter;
 public class Adicional {	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "quantidade")
 	private int quantidade;
 
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
-    @ManyToOne()
+    @ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "pedidoitem_id")
 	private PedidoItem pedidoItem;
     

@@ -20,7 +20,7 @@ import java.util.List;
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "nome")
@@ -31,12 +31,12 @@ public class Categoria {
 	@Column(name = "imagem")
 	private byte[] imagem;
 
-	@ManyToOne()
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 
-	@OneToMany(mappedBy = "categoria")
+	@OneToMany(mappedBy = "categoria", cascade=CascadeType.ALL)
 	private List<Item> items;
 
 }

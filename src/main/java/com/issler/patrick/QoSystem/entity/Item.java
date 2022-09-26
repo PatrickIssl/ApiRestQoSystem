@@ -34,15 +34,15 @@ public class Item {
 	@Column(name = "imagem")
 	private byte[] imagem;
 
-	@ManyToOne()
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
 
-	@OneToMany(mappedBy = "item")
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
 	private List<PedidoItem> pedidoItems;
 
-	@ManyToMany(mappedBy = "items")
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
 	private List<Ingrediente> ingredientes;
 
 }

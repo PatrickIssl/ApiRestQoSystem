@@ -1,12 +1,6 @@
 package com.issler.patrick.QoSystem.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
@@ -24,7 +18,7 @@ import lombok.Setter;
 public class Endereco {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "rua", length = 155)
@@ -46,11 +40,11 @@ public class Endereco {
 	private String observacao;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "endereco")
+	@OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
 	private Pessoa pessoa;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "endereco")
+	@OneToOne(mappedBy = "endereco", cascade=CascadeType.ALL)
 	private Empresa empresa;
 
 }
