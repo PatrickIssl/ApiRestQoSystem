@@ -48,6 +48,7 @@ public class Pessoa {
 	@Transient
 	private MultipartFile imagem;
 
+	@JsonIgnore
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "conta_id")
 	private Conta conta;

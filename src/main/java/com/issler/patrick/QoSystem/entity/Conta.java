@@ -41,7 +41,7 @@ public class Conta {
 	@Transient
 	private String mfa;
 
-	@JsonIgnore
+
 	@OneToOne(mappedBy = "conta", cascade=CascadeType.ALL)
 	private Pessoa pessoa;
 
