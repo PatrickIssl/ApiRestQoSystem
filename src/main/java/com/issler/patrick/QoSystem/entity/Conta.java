@@ -41,8 +41,8 @@ public class Conta {
 	@Transient
 	private String mfa;
 
-
-	@OneToOne(mappedBy = "conta", cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
 }

@@ -42,8 +42,7 @@ public class Pessoa {
 	private String telefone;
 
 	@JsonIgnore
-    @OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name = "conta_id")
+	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.ALL)
 	private Conta conta;
 
 
