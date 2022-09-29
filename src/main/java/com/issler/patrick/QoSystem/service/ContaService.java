@@ -3,6 +3,7 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.entity.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,15 @@ public class ContaService {
 			return new ResponseEntity<>("Conta deletado com sucesso", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Conta não encontrado", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<?> buscarId(Conta conta) {
+		Optional<Conta> contas = contaRepository.findById(conta.getId());
+		if (contas.isPresent()) {
+			return new ResponseEntity<Conta>(contas.get(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Conta não encontrada", HttpStatus.NOT_FOUND);
 		}
 	}
 

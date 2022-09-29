@@ -29,8 +29,12 @@ public class ContaController {
 	}
 
 	@RequestMapping(value = "/buscar", method = RequestMethod.POST)
-	public ResponseEntity<?> GetById(@RequestBody Conta conta) {
+	public ResponseEntity<?> GetByContaAndSenha(@RequestBody Conta conta) {
 		return service.buscar(conta);
+	}
+	@RequestMapping(value = "/buscarID", method = RequestMethod.POST)
+	public ResponseEntity<?> GetById(@RequestBody Conta conta) {
+		return service.buscarId(conta);
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
