@@ -58,7 +58,7 @@ public class ContaService {
 
 	public ResponseEntity<?> put(Conta contas) {
 		Optional<Conta> conta = contaRepository.findById(contas.getId());
-		if(contas.getSenha().length() < 6){
+		if(contas.getSenha().length() < 1){
 			return new ResponseEntity<>("Sua senha tem que ter mais de 6 caracteres", HttpStatus.BAD_REQUEST);
 		}
 		if (conta != null) {
