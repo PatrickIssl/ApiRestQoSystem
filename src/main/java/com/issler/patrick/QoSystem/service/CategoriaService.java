@@ -51,6 +51,7 @@ public class CategoriaService {
 	}
 
 	public ResponseEntity<?> save(Categoria categorias) {
+
 		categoriaRepository.save(categorias);
 		return new ResponseEntity<Categoria>(categorias, HttpStatus.OK);
 	}

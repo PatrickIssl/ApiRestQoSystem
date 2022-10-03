@@ -44,6 +44,7 @@ public class Empresa {
 	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
 	private List<Cargo> cargos;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
 	private List<Categoria> categorias;
 
