@@ -2,6 +2,9 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -37,11 +40,12 @@ public class Item {
 	@Transient
 	private MultipartFile imagem;
 
+	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
 	private List<PedidoItem> pedidoItems;
 

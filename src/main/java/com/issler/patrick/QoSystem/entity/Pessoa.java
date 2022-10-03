@@ -6,7 +6,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -45,7 +47,7 @@ public class Pessoa {
 	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.ALL)
 	private Conta conta;
 
-
+	@JsonBackReference
     @ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
@@ -54,7 +56,7 @@ public class Pessoa {
     @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(mappedBy = "pessoa")
 	private List<Pedido> pedidos;
 

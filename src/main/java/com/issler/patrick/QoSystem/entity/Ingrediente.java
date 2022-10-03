@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -34,7 +36,8 @@ public class Ingrediente {
 			inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
-	@JsonIgnore
+
+	@JsonManagedReference
 	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL)
 	private List<Adicional> adicionais;
 
