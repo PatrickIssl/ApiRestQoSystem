@@ -3,9 +3,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -27,17 +25,15 @@ public class PedidoItem {
 	@Column(name = "quantidade")
 	private int quantidade;
 
-	@JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
 
-	@JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "item_id")
 	private Item item;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoItem", cascade = CascadeType.ALL)
 	private List<Adicional> adicionais;
 }

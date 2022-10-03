@@ -2,9 +2,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -29,12 +27,11 @@ public class Cargo {
 	private String nome;
 
 
-	@JsonBackReference
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@OneToMany(mappedBy = "cargo", cascade=CascadeType.ALL)
 	private List<Pessoa> pessoas;
 
