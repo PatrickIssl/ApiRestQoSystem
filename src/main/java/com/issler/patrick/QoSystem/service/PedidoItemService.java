@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.PedidoItem;
-import com.issler.patrick.QoSystem.controller.repository.PedidoItemRepository;
+import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
 
 @Service
 public class PedidoItemService {

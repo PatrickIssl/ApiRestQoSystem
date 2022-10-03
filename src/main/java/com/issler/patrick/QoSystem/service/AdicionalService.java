@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Adicional;
-import com.issler.patrick.QoSystem.controller.repository.AdicionalRepository;
+import com.issler.patrick.QoSystem.repository.AdicionalRepository;
 
 @Service
 public class AdicionalService {

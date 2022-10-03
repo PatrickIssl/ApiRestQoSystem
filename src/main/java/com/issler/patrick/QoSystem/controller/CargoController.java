@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.controller;
 
 import javax.validation.Valid;
 
+import com.issler.patrick.QoSystem.entity.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,6 +31,12 @@ public class CargoController {
 	public ResponseEntity<?> GetById(@RequestBody Cargo cargo) {
 		return service.buscar(cargo);
 	}
+
+	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
+	public ResponseEntity<?> GetById(@RequestBody Empresa empresa) {
+		return service.buscarPorEmpresa(empresa);
+	}
+
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<?> Post(@Valid @RequestBody Cargo cargo) {
