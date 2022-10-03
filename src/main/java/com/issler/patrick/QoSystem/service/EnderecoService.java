@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Endereco;
-import com.issler.patrick.QoSystem.repository.EnderecoRepository;
+import com.issler.patrick.QoSystem.controller.repository.EnderecoRepository;
 
 @Service
 public class EnderecoService {

@@ -1,4 +1,4 @@
-package com.issler.patrick.QoSystem.repository;
+package com.issler.patrick.QoSystem.controller.repository;
 
 import java.util.List;
 

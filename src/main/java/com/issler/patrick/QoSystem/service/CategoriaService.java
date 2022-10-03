@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Empresa;
-import com.issler.patrick.QoSystem.repository.CategoriaRepository;
-import com.issler.patrick.QoSystem.repository.EmpresaRepository;
+import com.issler.patrick.QoSystem.controller.repository.CategoriaRepository;
+import com.issler.patrick.QoSystem.controller.repository.EmpresaRepository;
 
 @Service
 public class CategoriaService {

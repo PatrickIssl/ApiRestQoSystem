@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Pessoa;
-import com.issler.patrick.QoSystem.repository.PessoaRepository;
+import com.issler.patrick.QoSystem.controller.repository.PessoaRepository;
 
 @Service
 public class PessoaService {

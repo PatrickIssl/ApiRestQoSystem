@@ -3,13 +3,14 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.entity.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Conta;
-import com.issler.patrick.QoSystem.repository.ContaRepository;
+import com.issler.patrick.QoSystem.controller.repository.ContaRepository;
 
 import net.bytebuddy.utility.RandomString;
 

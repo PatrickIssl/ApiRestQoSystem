@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Item;
-import com.issler.patrick.QoSystem.repository.ItemRepository;
+import com.issler.patrick.QoSystem.controller.repository.ItemRepository;
 
 @Service
 public class ItemService {
