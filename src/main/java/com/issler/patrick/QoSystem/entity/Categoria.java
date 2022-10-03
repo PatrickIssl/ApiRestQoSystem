@@ -36,7 +36,7 @@ public class Categoria {
 	@Transient
 	private MultipartFile imagem;
 
-	@JsonBackReference
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
