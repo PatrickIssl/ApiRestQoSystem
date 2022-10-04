@@ -45,7 +45,6 @@ public class Item {
 	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
-	@JsonIgnore
 	@ManyToMany(mappedBy = "items", cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredientes;
 

@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +38,7 @@ public class Categoria {
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "categoria", cascade=CascadeType.PERSIST)
 	private List<Item> items;
 
