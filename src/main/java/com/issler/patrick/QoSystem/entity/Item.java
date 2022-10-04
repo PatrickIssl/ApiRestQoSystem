@@ -41,7 +41,6 @@ public class Item {
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-
 	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
