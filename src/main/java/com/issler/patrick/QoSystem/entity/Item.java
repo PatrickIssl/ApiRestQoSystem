@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
@@ -44,6 +45,7 @@ public class Item {
 	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "items", cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredientes;
 
