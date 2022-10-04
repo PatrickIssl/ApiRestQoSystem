@@ -20,6 +20,9 @@ public class CategoriaService {
 	CategoriaRepository categoriaRepository;
 
 	@Autowired
+	EmpresaService empresaService;
+
+	@Autowired
 	EmpresaRepository empresaRepository;
 
 	public ResponseEntity<String> delete(Categoria categorias) {
@@ -51,7 +54,9 @@ public class CategoriaService {
 	}
 
 	public ResponseEntity<?> save(Categoria categorias) {
-
+		Empresa empresa = empresaRepository.findById(categorias.getEmpresa().getId())
+						.get();
+		categorias.setEmpresa(empresa);
 		categoriaRepository.save(categorias);
 		return new ResponseEntity<Categoria>(categorias, HttpStatus.OK);
 	}
