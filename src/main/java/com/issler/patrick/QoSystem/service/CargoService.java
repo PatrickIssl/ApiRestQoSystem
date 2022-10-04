@@ -1,8 +1,10 @@
 package com.issler.patrick.QoSystem.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.issler.patrick.QoSystem.controller.repository.EmpresaRepository;
+import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,6 +39,15 @@ public class CargoService {
 			return new ResponseEntity<Cargo>(cargos.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Cargo não encontrado", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	public ResponseEntity<?> findAllByEmpresa(Cargo cargo) {
+		List<Cargo> cargos = cargoRepository.findAllByEmpresa(cargo);
+		if (!cargos.isEmpty()) {
+			return new ResponseEntity<>(cargos, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Lista de cargos vazia para essa empresa", HttpStatus.NOT_FOUND);
 		}
 	}
 

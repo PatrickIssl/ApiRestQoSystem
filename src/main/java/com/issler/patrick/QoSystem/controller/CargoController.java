@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.controller;
 
 import javax.validation.Valid;
 
+import com.issler.patrick.QoSystem.entity.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -40,4 +41,10 @@ public class CargoController {
 	public ResponseEntity<?> Delete(@Valid @RequestBody Cargo cargo) {
 		return service.delete(cargo);
 	}
+
+	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
+	public ResponseEntity<?> FindALL(@RequestBody Cargo cargo) {
+		return service.findAllByEmpresa(cargo);
+	}
+
 }
