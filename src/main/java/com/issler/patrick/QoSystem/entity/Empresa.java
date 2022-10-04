@@ -45,4 +45,8 @@ public class Empresa {
 	@OneToMany(mappedBy = "empresa" , cascade=CascadeType.ALL)
 	private List<Categoria> categorias;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	private List<Ingrediente> ingredientes;
+
 }

@@ -28,6 +28,10 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private Double valor;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "empresa_id")
+	private Empresa empresa;
+
 	@JsonIgnore
 	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ingrediente_item",
