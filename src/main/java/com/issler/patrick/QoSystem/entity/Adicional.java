@@ -22,11 +22,11 @@ public class Adicional {
 	@Column(name = "quantidade")
 	private int quantidade;
 
-    @ManyToOne(cascade=CascadeType.ALL , fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.ALL )
 	@JoinColumn(name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
-    @ManyToOne(cascade=CascadeType.ALL , fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.ALL )
 	@JoinColumn(name = "pedidoitem_id")
 	private PedidoItem pedidoItem;
     

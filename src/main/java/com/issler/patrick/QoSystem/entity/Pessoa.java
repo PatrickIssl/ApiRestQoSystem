@@ -42,20 +42,20 @@ public class Pessoa {
 	private String telefone;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.ALL)
 	private Conta conta;
 
 
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
     
-	@OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "pessoa", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pessoa")
 	private List<Pedido> pedidos;
 
 }

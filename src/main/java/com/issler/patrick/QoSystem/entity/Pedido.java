@@ -37,12 +37,12 @@ public class Pedido {
 	@Column(length = 255, name = "endereco_entrega")
 	private String enderecoEntrega;
 	
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private List<PedidoItem> pedidoItems;
 
 }

@@ -27,12 +27,12 @@ public class Cargo {
 	private String nome;
 
 
-	@ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cargo", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "cargo", cascade=CascadeType.ALL)
 	private List<Pessoa> pessoas;
 
 }
