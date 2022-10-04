@@ -1,22 +1,21 @@
 package com.issler.patrick.QoSystem.service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import com.issler.patrick.QoSystem.entity.*;
+import com.issler.patrick.QoSystem.entity.Categoria;
+import com.issler.patrick.QoSystem.entity.Ingrediente;
+import com.issler.patrick.QoSystem.entity.Item;
+import com.issler.patrick.QoSystem.entity.PedidoItem;
 import com.issler.patrick.QoSystem.repository.CategoriaRepository;
 import com.issler.patrick.QoSystem.repository.IngredienteRepository;
+import com.issler.patrick.QoSystem.repository.ItemRepository;
 import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.issler.patrick.QoSystem.repository.ItemRepository;
-
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ItemService {
@@ -52,29 +51,27 @@ public class ItemService {
 	}
 
 	public ResponseEntity<?> save(Item items) {
-		System.out.println(items);
 		List<Ingrediente> ingredientes = new ArrayList<>();
-		for(Ingrediente ingrediente :items.getIngredientes()){
-			Ingrediente ingredienteBusca = ingredienteRepository.findById(ingrediente.getId()).get();
-			if(ingredienteBusca != null){
-				ingredientes.add(ingredienteBusca);
-			}
+
+		List<Ingrediente> managedItens = items.getIngredientes();
+		for(Ingrediente ingrediente : managedItens){
+			Optional<Ingrediente> ingredienteBusca = ingredienteRepository.findById(ingrediente.getId());
+			ingredienteBusca.ifPresent(ingredientes::add);
 		}
 
 		List<PedidoItem> pedidoItems = new ArrayList<>();
-		for(PedidoItem pedidoitem :items.getPedidoItems()){
-			PedidoItem pedidoItemBusca = pedidoItemRepository.findById(pedidoitem.getId()).get();
-			if(pedidoItemBusca != null){
-				pedidoItems.add(pedidoItemBusca);
+		if(items.getPedidoItems() != null){
+			for(PedidoItem pedidoitem : items.getPedidoItems()){
+				Optional<PedidoItem> pedidoItemBusca = pedidoItemRepository.findById(pedidoitem.getId());
+				pedidoItemBusca.ifPresent(pedidoItems::add);
 			}
 		}
-		Categoria categoriaBusca = categoriaRepository.findById(items.getCategoria().getId())
-				.get();
-		if(categoriaBusca != null && pedidoItems.size() != 0 && ingredientes.size() != 0){
-			items.setPedidoItems(pedidoItems);
-			items.setIngredientes(ingredientes);
-			items.setCategoria(categoriaBusca);
-		}
+		Optional<Categoria> categoriaBusca = categoriaRepository.findById(items.getCategoria().getId());
+		categoriaBusca.ifPresent(items::setCategoria);
+		items.setPedidoItems(pedidoItems);
+		items.setIngredientes(ingredientes);
+
+
 		itemRepository.save(items);
 		return new ResponseEntity<Item>(items, HttpStatus.OK);
 	}
