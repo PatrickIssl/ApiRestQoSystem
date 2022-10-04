@@ -52,6 +52,7 @@ public class ItemService {
 	}
 
 	public ResponseEntity<?> save(Item items) {
+		System.out.println(items);
 		List<Ingrediente> ingredientes = new ArrayList<>();
 		for(Ingrediente ingrediente :items.getIngredientes()){
 			Ingrediente ingredienteBusca = ingredienteRepository.findById(ingrediente.getId()).get();
