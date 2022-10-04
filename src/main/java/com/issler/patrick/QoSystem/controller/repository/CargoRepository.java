@@ -13,6 +13,6 @@ import java.util.List;
 @Repository
 public interface CargoRepository extends JpaRepository<Cargo, Long> {
 
-    List<Cargo> findAllByEmpresa(Cargo cargo);
+    List<Cargo> findAllByEmpresa(Empresa empresa);
 
 }

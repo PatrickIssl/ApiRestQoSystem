@@ -42,8 +42,8 @@ public class CargoService {
 		}
 	}
 
-	public ResponseEntity<?> findAllByEmpresa(Cargo cargo) {
-		List<Cargo> cargos = cargoRepository.findAllByEmpresa(cargo);
+	public ResponseEntity<?> findAllByEmpresa(Empresa empresa) {
+		List<Cargo> cargos = cargoRepository.findAllByEmpresa(empresa);
 		if (!cargos.isEmpty()) {
 			return new ResponseEntity<>(cargos, HttpStatus.OK);
 		} else {

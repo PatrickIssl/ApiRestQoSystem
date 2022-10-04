@@ -43,8 +43,8 @@ public class CargoController {
 	}
 
 	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
-	public ResponseEntity<?> FindALL(@RequestBody Cargo cargo) {
-		return service.findAllByEmpresa(cargo);
+	public ResponseEntity<?> FindALL(@RequestBody Empresa empresa) {
+		return service.findAllByEmpresa(empresa);
 	}
 
 }
