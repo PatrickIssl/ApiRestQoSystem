@@ -37,15 +37,15 @@ public class Item {
 	@Transient
 	private MultipartFile imagem;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
 
-	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<PedidoItem> pedidoItems;
 
-	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Ingrediente> ingredientes;
 
 }

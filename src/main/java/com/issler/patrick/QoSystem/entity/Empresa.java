@@ -38,11 +38,11 @@ public class Empresa {
 	private Endereco endereco;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Cargo> cargos;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa" , cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Categoria> categorias;
 
 }

@@ -40,11 +40,11 @@ public class Endereco {
 	private String observacao;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Pessoa pessoa;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "endereco", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "endereco", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private Empresa empresa;
 
 }

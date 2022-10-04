@@ -28,14 +28,14 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private Double valor;
 
-	@ManyToMany( cascade = CascadeType.ALL)
+	@ManyToMany( cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),
 			inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Adicional> adicionais;
 
 }
