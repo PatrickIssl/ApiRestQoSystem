@@ -33,20 +33,20 @@ public class Empresa {
 	@Column(name = "cnpj", length = 30)
 	private String cnpj;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", cascade=CascadeType.PERSIST)
 	private List<Cargo> cargos;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa" , cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa" , cascade=CascadeType.PERSIST)
 	private List<Categoria> categorias;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredientes;
 
 }

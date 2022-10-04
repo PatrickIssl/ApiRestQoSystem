@@ -28,19 +28,19 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private Double valor;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 	@JsonIgnore
-	@ManyToMany( cascade = CascadeType.ALL)
+	@ManyToMany( cascade = CascadeType.PERSIST)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),
 			inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.PERSIST)
 	private List<Adicional> adicionais;
 
 }

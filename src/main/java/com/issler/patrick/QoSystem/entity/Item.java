@@ -42,10 +42,10 @@ public class Item {
 	private Categoria categoria;
 
 
-	@OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
-	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredientes;
 
 }

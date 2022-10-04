@@ -32,7 +32,7 @@ public class Conta {
 	@Transient
 	private String mfa;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 

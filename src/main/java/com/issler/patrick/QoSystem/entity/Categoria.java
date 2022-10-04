@@ -33,12 +33,12 @@ public class Categoria {
 	@Transient
 	private MultipartFile imagem;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
 
-	@OneToMany(mappedBy = "categoria", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "categoria", cascade=CascadeType.PERSIST)
 	private List<Item> items;
 
 }

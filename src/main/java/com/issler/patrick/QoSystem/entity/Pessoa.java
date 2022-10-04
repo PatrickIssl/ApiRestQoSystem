@@ -42,15 +42,15 @@ public class Pessoa {
 	private String telefone;
 
 	@JsonIgnore
-	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.PERSIST)
 	private Conta conta;
 
 
-    @ManyToOne(cascade=CascadeType.ALL)
+    @ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
     
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.PERSIST)
     @JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
