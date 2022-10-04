@@ -3,8 +3,7 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.issler.patrick.QoSystem.controller.repository.EmpresaRepository;
-import com.issler.patrick.QoSystem.entity.Categoria;
+import com.issler.patrick.QoSystem.repository.EmpresaRepository;
 import com.issler.patrick.QoSystem.entity.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Cargo;
-import com.issler.patrick.QoSystem.controller.repository.CargoRepository;
+import com.issler.patrick.QoSystem.repository.CargoRepository;
 
 @Service
 public class CargoService {

@@ -1,4 +1,4 @@
-package com.issler.patrick.QoSystem.controller.repository;
+package com.issler.patrick.QoSystem.repository;
 
 import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Empresa;

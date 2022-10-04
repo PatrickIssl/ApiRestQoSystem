@@ -3,21 +3,24 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.issler.patrick.QoSystem.entity.Cargo;
 import com.issler.patrick.QoSystem.entity.Empresa;
+import com.issler.patrick.QoSystem.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.Ingrediente;
-import com.issler.patrick.QoSystem.controller.repository.IngredienteRepository;
+import com.issler.patrick.QoSystem.repository.IngredienteRepository;
 
 @Service
 public class IngredienteService {
 
 	@Autowired
 	IngredienteRepository ingredienteRepository;
+
+	@Autowired
+	EmpresaRepository empresaRepository;
 
 	public ResponseEntity<String> delete(Ingrediente ingredientes) {
 		Optional<Ingrediente> ingrediente = ingredienteRepository.findById(ingredientes.getId());
@@ -49,6 +52,9 @@ public class IngredienteService {
 
 
 	public ResponseEntity<?> save(Ingrediente ingredientes) {
+		Empresa empresa = empresaRepository.findById(ingredientes.getEmpresa().getId())
+				.get();
+		ingredientes.setEmpresa(empresa);
 		ingredienteRepository.save(ingredientes);
 		return new ResponseEntity<Ingrediente>(ingredientes, HttpStatus.OK);
 	}
