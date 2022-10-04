@@ -3,6 +3,8 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.controller.repository.CargoRepository;
+import com.issler.patrick.QoSystem.entity.Cargo;
 import com.issler.patrick.QoSystem.entity.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,10 @@ public class ContaService {
 
 	@Autowired
 	ContaRepository contaRepository;
+
+	@Autowired
+	CargoRepository cargoRepository;
+
 
 	public ResponseEntity<String> delete(Conta contas) {
 		Optional<Conta> conta = contaRepository.findById(contas.getId());
@@ -49,6 +55,8 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> save(Conta contas) {
+		Cargo cargo = cargoRepository.getById(contas.getPessoa().getCargo().getId());
+		contas.getPessoa().setCargo(cargo);
 		if (!contaRepository.findAllByContaIgnoreCase(contas.getConta()).isEmpty()) {
 			return new ResponseEntity<>("Email já está em uso", HttpStatus.BAD_REQUEST);
 		}
