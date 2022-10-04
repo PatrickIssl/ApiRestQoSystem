@@ -28,6 +28,7 @@ public class Ingrediente {
 	@Column(name = "valor")
 	private Double valor;
 
+	@JsonIgnore
 	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),
