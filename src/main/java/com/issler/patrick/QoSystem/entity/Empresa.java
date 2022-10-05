@@ -42,6 +42,10 @@ public class Empresa {
 	private List<Cargo> cargos;
 
 	@JsonIgnore
+	@OneToMany(mappedBy = "empresa", cascade=CascadeType.PERSIST)
+	private List<Mesa> mesas;
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "empresa" , cascade=CascadeType.PERSIST)
 	private List<Categoria> categorias;
 
