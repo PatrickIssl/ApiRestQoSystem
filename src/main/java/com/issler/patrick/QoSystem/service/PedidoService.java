@@ -2,6 +2,11 @@ package com.issler.patrick.QoSystem.service;
 
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.entity.Adicional;
+import com.issler.patrick.QoSystem.entity.Mesa;
+import com.issler.patrick.QoSystem.entity.Pessoa;
+import com.issler.patrick.QoSystem.repository.MesaRepository;
+import com.issler.patrick.QoSystem.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +20,12 @@ public class PedidoService {
 
 	@Autowired
 	PedidoRepository pedidoRepository;
+
+	@Autowired
+	PessoaRepository pessoaRepository;
+
+	@Autowired
+	MesaRepository mesaRepository;
 
 	public ResponseEntity<String> delete(Pedido pedidos) {
 		Optional<Pedido> pedido = pedidoRepository.findById(pedidos.getId());
@@ -36,6 +47,16 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> save(Pedido pedidos) {
+		Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getId());
+		if (!pessoa.isPresent()){
+			return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+		}
+		Optional<Mesa>  mesa = mesaRepository.findById(pedidos.getMesa().getId());
+		if (!mesa.isPresent()){
+			return new ResponseEntity<>("Mesa não encontrada", HttpStatus.NOT_FOUND);
+		}
+		pedidos.setMesa(mesa.get());
+		pedidos.setPessoa(pessoa.get());
 		pedidoRepository.save(pedidos);
 		return new ResponseEntity<Pedido>(pedidos, HttpStatus.OK);
 	}

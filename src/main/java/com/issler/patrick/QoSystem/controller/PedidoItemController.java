@@ -31,6 +31,12 @@ public class PedidoItemController {
 		return service.buscar(pedidoItem);
 	}
 
+	@RequestMapping(value = "/buscar/pedido/mesa", method = RequestMethod.POST)
+	public ResponseEntity<?> GetByMesa(@RequestBody PedidoItem pedidoItem) {
+		return service.findAllByMesa(pedidoItem);
+	}
+
+
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<?> Post(@Valid @RequestBody PedidoItem pedidoItem) {
 		return service.save(pedidoItem);

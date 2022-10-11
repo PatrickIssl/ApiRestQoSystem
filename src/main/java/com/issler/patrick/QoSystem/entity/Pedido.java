@@ -41,8 +41,14 @@ public class Pedido {
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "mesa_id")
+	private Mesa mesa;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
+
+
 
 }

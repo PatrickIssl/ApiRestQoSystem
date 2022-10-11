@@ -68,7 +68,8 @@ public class ContaService {
 		if(contas.getSenha().length() < 1){
 			return new ResponseEntity<>("Sua senha tem que ter mais de 6 caracteres", HttpStatus.BAD_REQUEST);
 		}
-		if (conta != null) {
+		if (conta.isPresent()) {
+			contas.setPessoa(conta.get().getPessoa());
 			contaRepository.save(contas);
 			return new ResponseEntity<Conta>(contas, HttpStatus.OK);
 		}

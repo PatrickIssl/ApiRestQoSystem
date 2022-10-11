@@ -24,7 +24,9 @@ public class Mesa {
 	@Column(name = "nome")
 	private String nome;
 
-
+	@JsonIgnore
+	@OneToMany(mappedBy = "mesa", cascade = CascadeType.PERSIST)
+	private List<Pedido> pedido;
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
