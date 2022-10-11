@@ -33,12 +33,12 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Item item) {
+	public ResponseEntity<?> Post(@RequestBody Item item) {
 		return service.save(item);
 	}
 
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
-	public ResponseEntity<?> Delete(@Valid @RequestBody Item item) {
+	public ResponseEntity<?> Delete(@RequestBody Item item) {
 		return service.delete(item);
 	}
 
