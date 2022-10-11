@@ -74,9 +74,16 @@ public class ContaService {
 				if(cargo.isPresent()){
 					conta.get().getPessoa().setCargo(cargo.get());
 				}
-				System.out.println(cargo);
+			}
+			if(contas.getPessoa().getNome() != null){
+				conta.get().getPessoa().setNome(contas.getPessoa().getNome());
+			}
+			if(contas.getPessoa().getSalario() != null){
+				conta.get().getPessoa().setSalario(contas.getPessoa().getSalario());
 			}
 			contas.setPessoa(conta.get().getPessoa());
+
+
 			contaRepository.save(contas);
 			return new ResponseEntity<Conta>(contas, HttpStatus.OK);
 		}
