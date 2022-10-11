@@ -34,6 +34,7 @@ public class ItemService {
 	public ResponseEntity<String> delete(Item items) {
 		Optional<Item> item = itemRepository.findById(items.getId());
 		if (item.isPresent()) {
+			item.get().setCategoria(null);
 			itemRepository.delete(item.get());
 			return new ResponseEntity<>("Item deletado com sucesso", HttpStatus.OK);
 		} else {
