@@ -4,15 +4,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.issler.patrick.QoSystem.entity.Categoria;
 import com.issler.patrick.QoSystem.entity.Item;
 import com.issler.patrick.QoSystem.service.ItemService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,7 +32,14 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@RequestBody Item item) {
+	public ResponseEntity<?> Post(@RequestBody Item item, @RequestParam("imagem") MultipartFile file) {
+		if(file != null){
+			try {
+				item.setImagem(file.getBytes());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return service.save(item);
 	}
 

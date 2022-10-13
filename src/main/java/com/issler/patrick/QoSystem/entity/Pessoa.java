@@ -45,6 +45,8 @@ public class Pessoa {
 	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.PERSIST)
 	private Conta conta;
 
+	@Lob
+	private byte[] imagem;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cargo_id")

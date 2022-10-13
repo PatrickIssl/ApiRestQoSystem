@@ -5,14 +5,13 @@ import javax.validation.Valid;
 import com.issler.patrick.QoSystem.entity.Conta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.issler.patrick.QoSystem.entity.Pessoa;
 import com.issler.patrick.QoSystem.service.PessoaService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -33,7 +32,14 @@ public class PessoaController {
 	}
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Pessoa pessoa) {
+	public ResponseEntity<?> Post(@Valid @RequestBody Pessoa pessoa, @RequestParam("imagem") MultipartFile file) {
+		if(file != null){
+			try {
+				pessoa.setImagem(file.getBytes());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return service.save(pessoa);
 	}
 
@@ -42,7 +48,14 @@ public class PessoaController {
 		return service.delete(pessoa);
 	}
 	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
-	public ResponseEntity<?> Put(@Valid @RequestBody Pessoa pessoa) {
+	public ResponseEntity<?> Put(@Valid @RequestBody Pessoa pessoa, @RequestParam("imagem") MultipartFile file) {
+		if(file != null){
+			try {
+				pessoa.setImagem(file.getBytes());
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		return service.put(pessoa);
 	}
 

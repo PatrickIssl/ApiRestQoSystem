@@ -31,12 +31,8 @@ public class Item {
 	@Column(name = "valor")
 	private double valor;
 
-
-	@Column(name = "imageUrl")
-	private String imageUrl;
-
-	@Transient
-	private MultipartFile imagem;
+	@Lob
+	private byte[] imagem;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")

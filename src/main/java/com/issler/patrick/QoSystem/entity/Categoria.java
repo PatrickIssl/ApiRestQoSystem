@@ -28,11 +28,8 @@ public class Categoria {
 	@Column(name = "nome")
 	private String nome;
 
-	@Column(name = "imageUrl")
-	private String imageUrl;
-
-	@Transient
-	private MultipartFile imagem;
+	@Lob
+	private byte[] imagem;
 
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "empresa_id")
