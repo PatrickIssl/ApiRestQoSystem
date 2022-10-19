@@ -7,6 +7,7 @@ import com.issler.patrick.QoSystem.entity.Mesa;
 import com.issler.patrick.QoSystem.entity.Pedido;
 import com.issler.patrick.QoSystem.entity.Pessoa;
 import com.issler.patrick.QoSystem.repository.MesaRepository;
+import com.issler.patrick.QoSystem.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import com.issler.patrick.QoSystem.entity.PedidoItem;
 import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
+
+import javax.swing.text.html.Option;
 
 @Service
 public class PedidoItemService {
@@ -23,6 +26,9 @@ public class PedidoItemService {
 
 	@Autowired
 	MesaRepository mesaRepository;
+
+	@Autowired
+	PedidoRepository pedidoRepository;
 
 	public ResponseEntity<String> delete(PedidoItem pedidoITems) {
 		Optional<PedidoItem> pedidoITem = pedidoITemRepository.findById(pedidoITems.getId());
@@ -73,4 +79,13 @@ public class PedidoItemService {
 		return new ResponseEntity<>(pedidoITemRepository.findAll(), HttpStatus.OK);
 	}
 
+	public ResponseEntity<?> findAllByPedido(Pedido pedido) {
+		Optional<Pedido> pedidos = pedidoRepository.findById(pedido.getId());
+		if(pedidos.isPresent()){
+			Optional<List<PedidoItem>> pedidoItem = pedidoITemRepository.getAllByPedido(pedidos);
+			return new ResponseEntity<>(pedidoItem, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+		}
+	}
 }
