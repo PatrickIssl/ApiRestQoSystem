@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.issler.patrick.QoSystem.entity.Mesa;
 import com.issler.patrick.QoSystem.entity.Pedido;
+import com.issler.patrick.QoSystem.entity.Pessoa;
 import com.issler.patrick.QoSystem.repository.MesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

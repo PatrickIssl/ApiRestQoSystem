@@ -3,8 +3,10 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.entity.Pessoa;
 import com.issler.patrick.QoSystem.repository.EmpresaRepository;
 import com.issler.patrick.QoSystem.entity.Empresa;
+import com.issler.patrick.QoSystem.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,11 +24,19 @@ public class CargoService {
 	@Autowired
 	EmpresaRepository empresaRepository;
 
+	@Autowired
+	PessoaRepository pessoaRepository;
+
 	public ResponseEntity<String> delete(Cargo cargos) {
 		Optional<Cargo> cargo = cargoRepository.findById(cargos.getId());
 		if (cargo.isPresent()) {
-			cargoRepository.delete(cargo.get());
-			return new ResponseEntity<>("Cargo deletado com sucesso", HttpStatus.OK);
+			Optional<Pessoa> pessoa = pessoaRepository.findAllByCargo(cargo.get());
+			if (pessoa.isPresent()){
+				return new ResponseEntity<>("Pessoa encontrada com esse cargo", HttpStatus.BAD_REQUEST);
+			}else {
+				cargoRepository.delete(cargo.get());
+				return new ResponseEntity<>("Cargo deletado com sucesso", HttpStatus.OK);
+			}
 		} else {
 			return new ResponseEntity<>("Cargo não encontrado", HttpStatus.NOT_FOUND);
 		}

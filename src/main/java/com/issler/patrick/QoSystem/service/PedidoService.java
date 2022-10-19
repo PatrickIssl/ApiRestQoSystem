@@ -1,5 +1,6 @@
 package com.issler.patrick.QoSystem.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.issler.patrick.QoSystem.entity.Adicional;
@@ -74,4 +75,12 @@ public class PedidoService {
 		return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
 	}
 
+	public ResponseEntity<?> buscarPorStatusEPessoa(Pedido pedido) {
+		Optional<Pessoa> pessoa = pessoaRepository.findById(pedido.getPessoa().getId());
+		if(pessoa.isPresent()){
+			return new ResponseEntity<>(pedidoRepository.findAllByStatusAndPessoa(pedido.getStatus(), pedido.getPessoa()), HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+		}
+	}
 }

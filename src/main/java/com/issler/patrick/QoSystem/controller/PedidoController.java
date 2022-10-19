@@ -32,6 +32,12 @@ public class PedidoController {
 		return service.buscar(pedido);
 	}
 
+	@RequestMapping(value = "/buscar/status/pessoa", method = RequestMethod.POST)
+	public ResponseEntity<?> GetByStatusEPessoa(@RequestBody Pedido pedido) {
+		return service.buscarPorStatusEPessoa(pedido);
+	}
+
+
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<?> Post(@Valid @RequestBody Pedido pedido) {
 		return service.save(pedido);
