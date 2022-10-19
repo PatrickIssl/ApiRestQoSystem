@@ -2,16 +2,16 @@ package com.issler.patrick.QoSystem.controller;
 
 import javax.validation.Valid;
 
+import com.issler.patrick.QoSystem.entity.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.issler.patrick.QoSystem.entity.PedidoItem;
 import com.issler.patrick.QoSystem.service.PedidoItemService;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -45,5 +45,10 @@ public class PedidoItemController {
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
 	public ResponseEntity<?> Delete(@Valid @RequestBody PedidoItem pedidoItem) {
 		return service.delete(pedidoItem);
+	}
+
+	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
+	public ResponseEntity<?> Put(@Valid @RequestBody PedidoItem pedidoItem) {
+		return service.put(pedidoItem);
 	}
 }

@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.controller;
 
 import javax.validation.Valid;
 
+import com.issler.patrick.QoSystem.entity.PedidoItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,5 +40,10 @@ public class PedidoController {
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
 	public ResponseEntity<?> Delete(@Valid @RequestBody Pedido pedido) {
 		return service.delete(pedido);
+	}
+
+	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
+	public ResponseEntity<?> Put(@Valid @RequestBody Pedido pedido) {
+		return service.put(pedido);
 	}
 }

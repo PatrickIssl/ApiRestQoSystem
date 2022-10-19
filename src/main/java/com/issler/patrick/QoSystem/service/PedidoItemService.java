@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.issler.patrick.QoSystem.entity.Mesa;
+import com.issler.patrick.QoSystem.entity.Pedido;
 import com.issler.patrick.QoSystem.repository.MesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,8 +54,14 @@ public class PedidoItemService {
 			return new ResponseEntity<>("PedidoItem não encontrado", HttpStatus.NOT_FOUND);
 		}
 	}
-
-
+	public ResponseEntity<?> put(PedidoItem pedidoItems) {
+		Optional<PedidoItem> pedidoItem = pedidoITemRepository.findById(pedidoItems.getId());
+		if (pedidoItem != null) {
+			pedidoITemRepository.save(pedidoItems);
+			return new ResponseEntity<PedidoItem>(pedidoItems, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("PedidoItem não encontrado", HttpStatus.NOT_FOUND);
+	}
 
 	public ResponseEntity<?> save(PedidoItem pedidoITems) {
 		pedidoITemRepository.save(pedidoITems);

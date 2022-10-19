@@ -65,4 +65,13 @@ public class PedidoService {
 		return new ResponseEntity<>(pedidoRepository.findAll(), HttpStatus.OK);
 	}
 
+	public ResponseEntity<?> put(Pedido pedidos) {
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidos.getId());
+		if (pedido != null) {
+			pedidoRepository.save(pedidos);
+			return new ResponseEntity<Pedido>(pedidos, HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
+	}
+
 }
