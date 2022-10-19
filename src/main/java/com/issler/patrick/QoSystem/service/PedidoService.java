@@ -48,7 +48,7 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> save(Pedido pedidos) {
-		Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getId());
+		Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getPessoa().getId());
 		if (!pessoa.isPresent()){
 			return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
 		}
