@@ -23,7 +23,7 @@ public class Pedido {
 	private Long id;
 
 	@Column(name = "status")
-	private int status;
+	private Integer status;
 
 	@Column(length = 255, name = "observacao")
 	private String observacao;
