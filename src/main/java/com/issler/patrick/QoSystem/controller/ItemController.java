@@ -32,11 +32,11 @@ public class ItemController {
 	}
 
 
-	@RequestMapping(value = "/cadastrarnofile", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<?> Postnofile(@RequestBody Item item) {
 		return service.save(item);
 	}
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	@RequestMapping(value = "/cadastrarComFoto", method = RequestMethod.POST)
 	public ResponseEntity<?> Post(@RequestBody Item item, @RequestParam("imagem") MultipartFile file) {
 		if(file != null){
 			try {

@@ -36,8 +36,8 @@ public class CategoriaController {
 		return service.findAllByEmpresa(empresa);
 	}
 
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Categoria categoria, @RequestParam("imagem") MultipartFile file) {
+	@RequestMapping(value = "/cadastrarComFoto", method = RequestMethod.POST)
+	public ResponseEntity<?> PostComFoto(@Valid @RequestBody Categoria categoria, @RequestParam("imagem") MultipartFile file) {
 		if(file != null){
 			try {
 				categoria.setImagem(file.getBytes());
@@ -45,6 +45,11 @@ public class CategoriaController {
 				throw new RuntimeException(e);
 			}
 		}
+		return service.save(categoria);
+	}
+
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	public ResponseEntity<?> Post(@Valid @RequestBody Categoria categoria) {
 		return service.save(categoria);
 	}
 

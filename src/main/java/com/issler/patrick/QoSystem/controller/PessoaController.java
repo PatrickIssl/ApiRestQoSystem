@@ -31,8 +31,8 @@ public class PessoaController {
 		return service.buscar(pessoa);
 	}
 
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@Valid @RequestBody Pessoa pessoa, @RequestParam("imagem") MultipartFile file) {
+	@RequestMapping(value = "/cadastrarComFoto", method = RequestMethod.POST)
+	public ResponseEntity<?> PostComFoto(@Valid @RequestBody Pessoa pessoa, @RequestParam("imagem") MultipartFile file) {
 		if(file != null){
 			try {
 				pessoa.setImagem(file.getBytes());
@@ -40,6 +40,11 @@ public class PessoaController {
 				throw new RuntimeException(e);
 			}
 		}
+		return service.save(pessoa);
+	}
+
+	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	public ResponseEntity<?> Post(@Valid @RequestBody Pessoa pessoa) {
 		return service.save(pessoa);
 	}
 
