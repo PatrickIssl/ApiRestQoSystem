@@ -3,9 +3,8 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.issler.patrick.QoSystem.entity.Mesa;
-import com.issler.patrick.QoSystem.entity.Pedido;
-import com.issler.patrick.QoSystem.entity.Pessoa;
+import com.issler.patrick.QoSystem.entity.*;
+import com.issler.patrick.QoSystem.repository.ItemRepository;
 import com.issler.patrick.QoSystem.repository.MesaRepository;
 import com.issler.patrick.QoSystem.repository.PedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.issler.patrick.QoSystem.entity.PedidoItem;
 import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
 
 import javax.swing.text.html.Option;
@@ -29,6 +27,9 @@ public class PedidoItemService {
 
 	@Autowired
 	PedidoRepository pedidoRepository;
+
+	@Autowired
+	ItemRepository itemRepository;
 
 	public ResponseEntity<String> delete(PedidoItem pedidoITems) {
 		Optional<PedidoItem> pedidoITem = pedidoITemRepository.findById(pedidoITems.getId());
@@ -71,8 +72,17 @@ public class PedidoItemService {
 	}
 
 	public ResponseEntity<?> save(PedidoItem pedidoITems) {
-		pedidoITemRepository.save(pedidoITems);
-		return new ResponseEntity<PedidoItem>(pedidoITems, HttpStatus.OK);
+		Optional<Item> item = itemRepository.findById(pedidoITems.getItem().getId());
+		Optional<Pedido> pedido = pedidoRepository.findById(pedidoITems.getPedido().getId());
+		if (item.isPresent() && pedido.isPresent()){
+			pedidoITems.setPedido(pedido.get());
+			pedidoITems.setItem(item.get());
+			pedidoITemRepository.save(pedidoITems);
+			return new ResponseEntity<PedidoItem>(pedidoITems, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("Erro ao encontrar pedido/item", HttpStatus.NOT_FOUND);
+		}
+
 	}
 
 	public ResponseEntity<?> findAll() {
