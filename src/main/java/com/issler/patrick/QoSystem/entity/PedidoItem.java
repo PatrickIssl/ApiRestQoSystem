@@ -4,6 +4,7 @@ package com.issler.patrick.QoSystem.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class PedidoItem {
 	@Column(name = "quantidade")
 	private int quantidade;
 
+	@Nullable
     @ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;

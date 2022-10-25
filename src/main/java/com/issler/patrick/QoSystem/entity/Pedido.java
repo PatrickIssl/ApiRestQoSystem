@@ -4,6 +4,7 @@ package com.issler.patrick.QoSystem.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class Pedido {
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
+	@Nullable
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "mesa_id")
 	private Mesa mesa;
