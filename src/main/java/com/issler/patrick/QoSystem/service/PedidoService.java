@@ -48,16 +48,20 @@ public class PedidoService {
 	}
 
 	public ResponseEntity<?> save(Pedido pedidos) {
-		Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getPessoa().getId());
-		if (!pessoa.isPresent()){
-			return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+		if(pedidos.getPessoa() != null){
+			Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getPessoa().getId());
+			if (!pessoa.isPresent()){
+				return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
+			}
+			pedidos.setPessoa(pessoa.get());
 		}
-		Optional<Mesa>  mesa = mesaRepository.findById(pedidos.getMesa().getId());
-		if (!mesa.isPresent()){
-			return new ResponseEntity<>("Mesa não encontrada", HttpStatus.NOT_FOUND);
+		if(pedidos.getMesa() != null){
+			Optional<Mesa>  mesa = mesaRepository.findById(pedidos.getMesa().getId());
+			if (!mesa.isPresent()){
+				return new ResponseEntity<>("Mesa não encontrada", HttpStatus.NOT_FOUND);
+			}
+			pedidos.setMesa(mesa.get());
 		}
-		pedidos.setMesa(mesa.get());
-		pedidos.setPessoa(pessoa.get());
 		pedidoRepository.save(pedidos);
 		return new ResponseEntity<Pedido>(pedidos, HttpStatus.OK);
 	}
