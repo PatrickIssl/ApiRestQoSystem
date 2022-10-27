@@ -66,6 +66,12 @@ public class PedidoItemService {
     public ResponseEntity<?> put(PedidoItem pedidoItems) {
         Optional<PedidoItem> pedidoItem = pedidoITemRepository.findById(pedidoItems.getId());
         if (pedidoItem != null) {
+            if(pedidoItems.getPedido() != null){
+                Optional<Pedido> pedido = pedidoRepository.findById(pedidoItems.getPedido().getId());
+                if(pedido.isPresent()) {
+                    pedidoItems.setPedido(pedido.get());
+                }
+            }
             pedidoITemRepository.save(pedidoItems);
             return new ResponseEntity<PedidoItem>(pedidoItems, HttpStatus.OK);
         }
