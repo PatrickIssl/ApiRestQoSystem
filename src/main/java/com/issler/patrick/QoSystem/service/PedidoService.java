@@ -78,14 +78,14 @@ public class PedidoService {
 				if (!mesa.isPresent()){
 					return new ResponseEntity<>("Mesa não encontrada", HttpStatus.NOT_FOUND);
 				}
-				pedidos.setMesa(mesa.get());
+				pedido.get().setMesa(mesa.get());
 			}
 			if(pedidos.getPessoa() != null){
 				Optional<Pessoa>  pessoa = pessoaRepository.findById(pedidos.getPessoa().getId());
 				if (!pessoa.isPresent()){
 					return new ResponseEntity<>("Pessoa não encontrada", HttpStatus.NOT_FOUND);
 				}
-				pedidos.setPessoa(pessoa.get());
+				pedido.get().setPessoa(pessoa.get());
 			}
 			if(pedidos.getStatus() != null){
 				pedido.get().setStatus(pedidos.getStatus());
