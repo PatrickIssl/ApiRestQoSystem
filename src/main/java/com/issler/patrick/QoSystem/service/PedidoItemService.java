@@ -115,4 +115,17 @@ public class PedidoItemService {
             return new ResponseEntity<>("Pedido não encontrado", HttpStatus.NOT_FOUND);
         }
     }
+
+    public ResponseEntity<?> findAllByMesaAndStatus(PedidoItem pedidoItem) {
+        Optional<Mesa> mesa = mesaRepository.findById(pedidoItem.getPedido().getMesa().getId());
+        if (!mesa.isPresent()) {
+            return new ResponseEntity<>("mesa não encontrada", HttpStatus.NOT_FOUND);
+        }
+        List<PedidoItem> pedidoITems = pedidoITemRepository.findAllByPedidoMesaAndStatus(mesa.get(), pedidoItem.getPedido().getStatus());
+        if (!pedidoITems.isEmpty()) {
+            return new ResponseEntity<List<PedidoItem>>(pedidoITems, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("PedidoItem não encontrado", HttpStatus.NOT_FOUND);
+        }
+    }
 }

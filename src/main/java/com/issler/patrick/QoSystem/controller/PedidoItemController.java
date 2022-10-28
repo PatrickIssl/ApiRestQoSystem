@@ -36,6 +36,14 @@ public class PedidoItemController {
 		return service.findAllByMesa(pedidoItem);
 	}
 
+
+	@RequestMapping(value = "/buscar/pedido/mesa/status", method = RequestMethod.POST)
+	public ResponseEntity<?> getAllByMesaAndStatus(@RequestBody PedidoItem pedidoItem) {
+		return service.findAllByMesaAndStatus(pedidoItem);
+	}
+
+
+
 	@RequestMapping(value = "/buscar/pedido", method = RequestMethod.POST)
 	public ResponseEntity<?> getByPedido(@RequestBody PedidoItem pedidoItem) {
 		return service.findAllByPedido(pedidoItem.getPedido());
