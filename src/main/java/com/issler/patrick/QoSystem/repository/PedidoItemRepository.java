@@ -17,5 +17,5 @@ public interface PedidoItemRepository extends JpaRepository<PedidoItem, Long> {
 
     Optional<List<PedidoItem>> getAllByPedido(Optional<Pedido> pedidos);
 
-    List<PedidoItem> findAllByPedidoMesaAndStatus(Mesa mesa, Integer status);
+    List<PedidoItem> findAllByPedidoMesaAndPedidoStatus(Mesa mesa, Integer status);
 }

@@ -121,7 +121,7 @@ public class PedidoItemService {
         if (!mesa.isPresent()) {
             return new ResponseEntity<>("mesa não encontrada", HttpStatus.NOT_FOUND);
         }
-        List<PedidoItem> pedidoITems = pedidoITemRepository.findAllByPedidoMesaAndStatus(mesa.get(), pedidoItem.getPedido().getStatus());
+        List<PedidoItem> pedidoITems = pedidoITemRepository.findAllByPedidoMesaAndPedidoStatus(mesa.get(), pedidoItem.getPedido().getStatus());
         if (!pedidoITems.isEmpty()) {
             return new ResponseEntity<List<PedidoItem>>(pedidoITems, HttpStatus.OK);
         } else {
