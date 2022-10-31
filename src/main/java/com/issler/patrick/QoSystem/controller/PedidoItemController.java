@@ -37,7 +37,7 @@ public class PedidoItemController {
 	}
 
 
-	@RequestMapping(value = "/buscar/pedido/mesa/status", method = RequestMethod.GET)
+	@RequestMapping(value = "/buscar/pedido/mesa/status", method = RequestMethod.POST)
 	public ResponseEntity<?> getAllByMesaAndStatus(@RequestBody PedidoItem pedidoItem) {
 		return service.findAllByMesaAndStatus(pedidoItem);
 	}
