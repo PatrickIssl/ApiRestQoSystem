@@ -60,14 +60,16 @@ public class ContaService {
 
 	public ResponseEntity<?> save(Conta contas) {
 		if(contas.getPessoa() != null) {
+			if(contas.getPessoa().getCargo() != null){
 			Optional<Cargo> cargo = cargoRepository.findById(contas.getPessoa().getCargo().getId());
 			if(cargo.isPresent()) {
 				contas.getPessoa().setCargo(cargo.get());
-			}
+			}}
+			if(contas.getPessoa().getEndereco() != null){
 			Optional<Endereco> endereco = enderecoRepository.findById(contas.getPessoa().getEndereco().getId());
 			if(endereco.isPresent()){
 				contas.getPessoa().setEndereco(endereco.get());
-			}
+			}}
 		}
 		if (!contaRepository.findAllByContaIgnoreCase(contas.getConta()).isEmpty()) {
 			return new ResponseEntity<>("Email já está em uso", HttpStatus.BAD_REQUEST);
