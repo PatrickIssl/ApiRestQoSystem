@@ -3,8 +3,10 @@ package com.issler.patrick.QoSystem.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.issler.patrick.QoSystem.entity.Endereco;
 import com.issler.patrick.QoSystem.repository.CargoRepository;
 import com.issler.patrick.QoSystem.entity.Cargo;
+import com.issler.patrick.QoSystem.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,9 @@ public class ContaService {
 
 	@Autowired
 	CargoRepository cargoRepository;
+
+	@Autowired
+	EnderecoRepository enderecoRepository;
 
 
 	public ResponseEntity<String> delete(Conta contas) {
@@ -54,8 +59,16 @@ public class ContaService {
 	}
 
 	public ResponseEntity<?> save(Conta contas) {
-		Cargo cargo = cargoRepository.getById(contas.getPessoa().getCargo().getId());
-		contas.getPessoa().setCargo(cargo);
+		if(contas.getPessoa() != null) {
+			Optional<Cargo> cargo = cargoRepository.findById(contas.getPessoa().getCargo().getId());
+			if(cargo.isPresent()) {
+				contas.getPessoa().setCargo(cargo.get());
+			}
+			Optional<Endereco> endereco = enderecoRepository.findById(contas.getPessoa().getEndereco().getId());
+			if(endereco.isPresent()){
+				contas.getPessoa().setEndereco(endereco.get());
+			}
+		}
 		if (!contaRepository.findAllByContaIgnoreCase(contas.getConta()).isEmpty()) {
 			return new ResponseEntity<>("Email já está em uso", HttpStatus.BAD_REQUEST);
 		}
