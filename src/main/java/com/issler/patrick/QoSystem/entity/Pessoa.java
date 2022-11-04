@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 import lombok.Getter;
@@ -45,8 +46,8 @@ public class Pessoa {
 	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.PERSIST)
 	private Conta conta;
 
-	@Lob
-	private byte[] imagem;
+	@Nullable
+	private Double imagem;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cargo_id")

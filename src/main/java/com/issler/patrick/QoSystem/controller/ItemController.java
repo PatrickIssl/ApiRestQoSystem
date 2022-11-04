@@ -36,17 +36,6 @@ public class ItemController {
 	public ResponseEntity<?> Postnofile(@RequestBody Item item) {
 		return service.save(item);
 	}
-	@RequestMapping(value = "/cadastrarComFoto", method = RequestMethod.POST)
-	public ResponseEntity<?> Post(@RequestBody Item item, @RequestParam("imagem") MultipartFile file) {
-		if(file != null){
-			try {
-				item.setImagem(file.getBytes());
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return service.save(item);
-	}
 
 	@RequestMapping(value = "/deletar", method = RequestMethod.DELETE)
 	public ResponseEntity<?> Delete(@RequestBody Item item) {

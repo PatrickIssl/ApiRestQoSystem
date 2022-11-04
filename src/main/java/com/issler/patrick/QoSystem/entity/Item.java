@@ -31,8 +31,8 @@ public class Item {
 	@Column(name = "valor")
 	private double valor;
 
-	@Lob
-	private byte[] imagem;
+	@Nullable
+	private Double imagem;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
