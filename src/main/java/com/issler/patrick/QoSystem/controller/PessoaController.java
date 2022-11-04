@@ -40,14 +40,7 @@ public class PessoaController {
 		return service.delete(pessoa);
 	}
 	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
-	public ResponseEntity<?> Put(@Valid @RequestBody Pessoa pessoa, @RequestParam("imagem") MultipartFile file) {
-		if(file != null){
-			try {
-				pessoa.setImagem(file.getBytes());
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
+	public ResponseEntity<?> Put(@Valid @RequestBody Pessoa pessoa) {
 		return service.put(pessoa);
 	}
 
