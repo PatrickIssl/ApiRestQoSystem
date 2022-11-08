@@ -33,7 +33,7 @@ public class Ingrediente {
 	private Empresa empresa;
 
 	@JsonIgnore
-	@ManyToMany( cascade = CascadeType.PERSIST)
+	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),
 			inverseJoinColumns = @JoinColumn(name = "item_id"))

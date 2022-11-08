@@ -42,7 +42,7 @@ public class Item {
 	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
-	@ManyToMany(mappedBy = "items", cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
 	private List<Ingrediente> ingredientes;
 
 }
