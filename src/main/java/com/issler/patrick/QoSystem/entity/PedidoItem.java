@@ -35,6 +35,9 @@ public class PedidoItem {
 	@JoinColumn(name = "item_id")
 	private Item item;
 
+	@Column(length = 255, name = "observacao")
+	private String observacao;
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "pedidoItem", cascade = CascadeType.PERSIST)
 	private List<Adicional> adicionais;
