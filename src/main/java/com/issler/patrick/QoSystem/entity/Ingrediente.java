@@ -47,7 +47,7 @@ public class Ingrediente {
 	private Boolean adicional;
 
 	@Column(name = "quantidade")
-	private String quantidade;
+	private Integer quantidade;
 
 	@Column(name = "medida")
 	private String medida;
