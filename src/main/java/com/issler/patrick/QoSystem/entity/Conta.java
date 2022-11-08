@@ -36,4 +36,7 @@ public class Conta {
 	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
+	@Column(name = "ativo")
+	private Boolean ativo;
+
 }
