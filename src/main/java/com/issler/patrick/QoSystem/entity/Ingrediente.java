@@ -43,4 +43,13 @@ public class Ingrediente {
 	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.PERSIST)
 	private List<Adicional> adicionais;
 
+	@Column(name = "adicional")
+	private Boolean adicional;
+
+	@Column(name = "quantidade")
+	private String quantidade;
+
+	@Column(name = "medida")
+	private String medida;
+
 }
