@@ -33,6 +33,10 @@ public class ContaService {
 	public ResponseEntity<String> delete(Conta contas) {
 		Optional<Conta> conta = contaRepository.findById(contas.getId());
 		if (conta.isPresent()) {
+			if(conta.get().getPessoa().getPedidos() != null){
+				return new ResponseEntity<>("Conta vinculada a pedidos", HttpStatus.BAD_REQUEST);
+			}
+			conta.get().getPessoa().setCargo(null);
 			contaRepository.delete(conta.get());
 			return new ResponseEntity<>("Conta deletado com sucesso", HttpStatus.OK);
 		} else {
