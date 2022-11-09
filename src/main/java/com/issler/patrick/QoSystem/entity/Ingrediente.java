@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
@@ -32,7 +33,6 @@ public class Ingrediente {
 	@JoinColumn(name = "empresa_id")
 	private Empresa empresa;
 
-	@JsonIgnore
 	@ManyToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ingrediente_item",
 			joinColumns = @JoinColumn(name = "ingrediente_id"),

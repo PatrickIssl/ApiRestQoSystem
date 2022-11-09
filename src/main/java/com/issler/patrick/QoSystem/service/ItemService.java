@@ -72,6 +72,9 @@ public class ItemService {
 		items.setPedidoItems(pedidoItems);
 		items.setIngredientes(ingredientes);
 
+		for (Ingrediente ingrediente: ingredientes){
+			ingredienteRepository.save(ingrediente);
+		}
 
 		itemRepository.save(items);
 		return new ResponseEntity<Item>(items, HttpStatus.OK);
@@ -84,6 +87,22 @@ public class ItemService {
 	public ResponseEntity<?> findAllByCategoria(Categoria categoria) {
 		List<Item> item = itemRepository.findAllByCategoria(categoria);
 		if (!item.isEmpty()) {
+			if(!item.isEmpty()){
+				List<Item> listaitems = new ArrayList<>();
+				for (Item itemFor: item){
+					if (itemFor.getIngredientes() != null){
+						List<Ingrediente> listaIngredientes = new ArrayList<>();
+						for (Ingrediente ingredite: itemFor.getIngredientes()){
+							ingredite.setItems(null);
+							listaIngredientes.add(ingredite);
+						}
+						itemFor.setIngredientes(listaIngredientes);
+						listaitems.add(itemFor);
+					}
+				}
+
+				return new ResponseEntity<>(listaitems, HttpStatus.OK);
+			}
 			return new ResponseEntity<>(item, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Lista de items vazio para essa categoria", HttpStatus.NOT_FOUND);
