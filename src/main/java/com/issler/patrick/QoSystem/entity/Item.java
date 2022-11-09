@@ -35,7 +35,7 @@ public class Item {
 	@Nullable
 	private String imagem;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
@@ -43,7 +43,7 @@ public class Item {
 	@OneToMany(mappedBy = "item", cascade = CascadeType.PERSIST)
 	private List<PedidoItem> pedidoItems;
 
-	@ManyToMany(mappedBy = "items", cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "items", cascade = CascadeType.PERSIST)
 	private List<Ingrediente> ingredientes;
 
 }
