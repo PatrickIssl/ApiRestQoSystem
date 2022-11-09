@@ -45,6 +45,14 @@ public class ItemService {
 	public ResponseEntity<?> buscar(Item item) {
 		Optional<Item> items = itemRepository.findById(item.getId());
 		if (items.isPresent()) {
+			List<Ingrediente> listaIngredientes = new ArrayList<>();
+			if(!items.get().getIngredientes().isEmpty()){
+				for(Ingrediente ingrediente: items.get().getIngredientes()){
+					ingrediente.setItems(null);
+					listaIngredientes.add(ingrediente);
+				}
+			}
+			items.get().setIngredientes(listaIngredientes);
 			return new ResponseEntity<Item>(items.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Item não encontrado", HttpStatus.NOT_FOUND);
@@ -71,17 +79,43 @@ public class ItemService {
 		categoriaBusca.ifPresent(items::setCategoria);
 		items.setPedidoItems(pedidoItems);
 		items.setIngredientes(ingredientes);
-
 		for (Ingrediente ingrediente: ingredientes){
+			ingrediente.getItems().add(items);
 			ingredienteRepository.save(ingrediente);
 		}
 
 		itemRepository.save(items);
+		if(items.getIngredientes() != null){
+			List<Ingrediente> ingredientesLista = new ArrayList<>();
+			for(Ingrediente ingredienteObj :items.getIngredientes()){
+				ingredienteObj.setItems(null);
+				ingredientesLista.add(ingredienteObj);
+			}
+			items.setIngredientes(ingredientesLista);
+		}
 		return new ResponseEntity<Item>(items, HttpStatus.OK);
 	}
 
 	public ResponseEntity<?> findAll() {
-		return new ResponseEntity<>(itemRepository.findAll(), HttpStatus.OK);
+		List<Item> item = itemRepository.findAll();
+		if (!item.isEmpty()) {
+			if (!item.isEmpty()) {
+				List<Item> listaitems = new ArrayList<>();
+				for (Item itemFor : item) {
+					if (itemFor.getIngredientes() != null) {
+						List<Ingrediente> listaIngredientes = new ArrayList<>();
+						for (Ingrediente ingredite : itemFor.getIngredientes()) {
+							ingredite.setItems(null);
+							listaIngredientes.add(ingredite);
+						}
+						itemFor.setIngredientes(listaIngredientes);
+						listaitems.add(itemFor);
+					}
+				}
+				return new ResponseEntity<>(listaitems, HttpStatus.OK);
+			}
+		}
+			return new ResponseEntity<>("vazio", HttpStatus.NOT_FOUND);
 	}
 
 	public ResponseEntity<?> findAllByCategoria(Categoria categoria) {
@@ -100,7 +134,6 @@ public class ItemService {
 						listaitems.add(itemFor);
 					}
 				}
-
 				return new ResponseEntity<>(listaitems, HttpStatus.OK);
 			}
 			return new ResponseEntity<>(item, HttpStatus.OK);

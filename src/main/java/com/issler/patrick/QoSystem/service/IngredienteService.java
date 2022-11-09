@@ -1,5 +1,6 @@
 package com.issler.patrick.QoSystem.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +35,11 @@ public class IngredienteService {
 
 	public ResponseEntity<?> buscar(Ingrediente ingrediente) {
 		Optional<Ingrediente> ingredientes = ingredienteRepository.findById(ingrediente.getId());
+
+
 		if (ingredientes.isPresent()) {
+
+			ingrediente.setItems(null);
 			return new ResponseEntity<Ingrediente>(ingredientes.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("Ingrediente não encontrado", HttpStatus.NOT_FOUND);
@@ -42,10 +47,17 @@ public class IngredienteService {
 	}
 
 	public ResponseEntity<?> findAllByEmpresa(Empresa empresa) {
-		List<Ingrediente> ingredientes = ingredienteRepository.findAllByEmpresa(empresa);
-		if (!ingredientes.isEmpty()) {
-			return new ResponseEntity<>(ingredientes, HttpStatus.OK);
-		} else {
+		List<Ingrediente> listaIngrediente = ingredienteRepository.findAllByEmpresa(empresa);
+		if(!listaIngrediente.isEmpty()){
+			List<Ingrediente> ingredieteLista = new ArrayList<>();
+			for(Ingrediente ingrediente : listaIngrediente){
+				ingrediente.setItems(null);
+				ingredieteLista.add(ingrediente);
+			}
+
+			return new ResponseEntity<>(ingredieteLista, HttpStatus.OK);
+		}
+		else {
 			return new ResponseEntity<>("Lista de ingredientes vazia para essa empresa", HttpStatus.NOT_FOUND);
 		}
 	}
@@ -60,7 +72,18 @@ public class IngredienteService {
 	}
 
 	public ResponseEntity<?> findAll() {
-		return new ResponseEntity<>(ingredienteRepository.findAll(), HttpStatus.OK);
+
+		List<Ingrediente> listaIngrediente = ingredienteRepository.findAll();
+		if(!listaIngrediente.isEmpty()){
+			List<Ingrediente> ingredieteLista = new ArrayList<>();
+			for(Ingrediente ingrediente : listaIngrediente){
+				ingrediente.setItems(null);
+				ingredieteLista.add(ingrediente);
+			}
+
+			return new ResponseEntity<>(ingredieteLista, HttpStatus.OK);
+		}
+ 		return new ResponseEntity<>(listaIngrediente, HttpStatus.OK);
 	}
 
 }

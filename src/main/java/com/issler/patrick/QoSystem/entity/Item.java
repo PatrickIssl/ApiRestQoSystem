@@ -33,7 +33,7 @@ public class Item {
 	private double valor;
 
 	@Nullable
-	private Double imagem;
+	private String imagem;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoria_id")
