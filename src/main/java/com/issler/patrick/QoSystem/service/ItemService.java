@@ -81,7 +81,6 @@ public class ItemService {
 		items.setIngredientes(ingredientes);
 		for (Ingrediente ingrediente: ingredientes){
 			ingrediente.getItems().add(items);
-			ingredienteRepository.save(ingrediente);
 		}
 
 		itemRepository.save(items);
