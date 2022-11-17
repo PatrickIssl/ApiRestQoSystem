@@ -12,4 +12,6 @@ import java.util.List;
 public interface IngredienteRepository extends JpaRepository<Ingrediente, Long> {
 
     List<Ingrediente> findAllByEmpresa(Empresa empresa);
+
+    List<Ingrediente> findAllByAdicional(Boolean adicional);
 }

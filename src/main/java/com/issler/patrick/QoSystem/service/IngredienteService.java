@@ -86,4 +86,17 @@ public class IngredienteService {
  		return new ResponseEntity<>(listaIngrediente, HttpStatus.OK);
 	}
 
+	public ResponseEntity<?> listarPorAdicional(Boolean adicional) {
+		List<Ingrediente> listaIngrediente = ingredienteRepository.findAllByAdicional(adicional);
+		if(!listaIngrediente.isEmpty()){
+			List<Ingrediente> ingredieteLista = new ArrayList<>();
+			for(Ingrediente ingrediente : listaIngrediente){
+				ingrediente.setItems(null);
+				ingredieteLista.add(ingrediente);
+			}
+
+			return new ResponseEntity<>(ingredieteLista, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(listaIngrediente, HttpStatus.OK);
+	}
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import com.issler.patrick.QoSystem.entity.Ingrediente;
 import com.issler.patrick.QoSystem.service.IngredienteService;
 
@@ -31,6 +31,12 @@ public class IngredienteController {
 	public ResponseEntity<?> GetById(@RequestBody Ingrediente ingrediente) {
 		return service.buscar(ingrediente);
 	}
+
+	@RequestMapping(value = "/listar/{adicional}", method = RequestMethod.POST)
+	public ResponseEntity<?> GetById(@PathVariable Boolean adicional) {
+		return service.listarPorAdicional(adicional);
+	}
+
 
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	public ResponseEntity<?> Post(@Valid @RequestBody Ingrediente ingrediente) {
