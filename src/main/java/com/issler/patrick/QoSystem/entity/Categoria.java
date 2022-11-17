@@ -29,7 +29,7 @@ public class Categoria {
 	private String nome;
 
 	@Nullable
-	private Double imagem;
+	private String imagem;
 
 	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "empresa_id")

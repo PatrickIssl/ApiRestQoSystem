@@ -47,7 +47,7 @@ public class Pessoa {
 	private Conta conta;
 
 	@Nullable
-	private Double imagem;
+	private String imagem;
 
     @ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cargo_id")
