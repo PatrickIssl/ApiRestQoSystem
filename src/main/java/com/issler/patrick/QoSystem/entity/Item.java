@@ -32,7 +32,6 @@ public class Item {
 	@Column(name = "valor")
 	private double valor;
 
-	@Lob
 	@Nullable
 	private String imagem;
 
