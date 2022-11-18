@@ -28,6 +28,7 @@ public class Categoria {
 	@Column(name = "nome")
 	private String nome;
 
+	@Lob
 	@Nullable
 	private String imagem;
 

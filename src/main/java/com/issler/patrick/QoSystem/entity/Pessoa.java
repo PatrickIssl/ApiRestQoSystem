@@ -46,6 +46,7 @@ public class Pessoa {
 	@OneToOne(mappedBy = "pessoa", cascade=CascadeType.PERSIST)
 	private Conta conta;
 
+	@Lob
 	@Nullable
 	private String imagem;
 
