@@ -26,6 +26,7 @@ public class Adicional {
 	@JoinColumn(name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
+	@JsonIgnore
     @ManyToOne(cascade=CascadeType.PERSIST )
 	@JoinColumn(name = "pedidoitem_id")
 	private PedidoItem pedidoItem;
