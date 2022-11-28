@@ -44,6 +44,10 @@ public class Ingrediente {
 	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.PERSIST)
 	private List<Adicional> adicionais;
 
+	@JsonIgnore
+	@OneToMany(mappedBy = "ingrediente", cascade = CascadeType.PERSIST)
+	private List<Remover> remover;
+
 	@Column(name = "adicional")
 	private Boolean adicional;
 

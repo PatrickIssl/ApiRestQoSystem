@@ -41,4 +41,9 @@ public class PedidoItem {
 
 	@OneToMany(mappedBy = "pedidoItem", cascade = CascadeType.PERSIST)
 	private List<Adicional> adicionais;
+
+	@OneToMany(mappedBy = "pedidoItem", cascade = CascadeType.PERSIST)
+	private List<Remover> remover;
+
+
 }
