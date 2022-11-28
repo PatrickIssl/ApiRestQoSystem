@@ -94,6 +94,9 @@ public class ContaService {
 					conta.get().getPessoa().setCargo(cargo.get());
 				}
 			}
+			if(contas.getPessoa().getImagem() != null){
+				conta.get().getPessoa().setImagem(contas.getPessoa().getImagem());
+			}
 			if(contas.getPessoa().getNome() != null){
 				conta.get().getPessoa().setNome(contas.getPessoa().getNome());
 			}
