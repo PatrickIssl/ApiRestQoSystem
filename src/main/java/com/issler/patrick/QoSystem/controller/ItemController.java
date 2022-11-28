@@ -2,6 +2,7 @@ package com.issler.patrick.QoSystem.controller;
 
 import javax.validation.Valid;
 
+import com.issler.patrick.QoSystem.entity.Empresa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +46,16 @@ public class ItemController {
 	@RequestMapping(value = "/buscar/categoria", method = RequestMethod.POST)
 	public ResponseEntity<?> FindALL(@RequestBody Categoria categoria) {
 		return service.findAllByCategoria(categoria);
+	}
+
+	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
+	public ResponseEntity<?> FindALL(@RequestBody Empresa empresa) {
+		return service.findAllByEmpresa(empresa);
+	}
+
+	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
+	public ResponseEntity<?> Put(@Valid @RequestBody Item item) {
+		return service.put(item);
 	}
 
 }

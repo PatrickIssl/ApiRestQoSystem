@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.issler.patrick.QoSystem.entity.Empresa;
+import com.issler.patrick.QoSystem.entity.Item;
 import com.issler.patrick.QoSystem.repository.EmpresaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -98,5 +99,21 @@ public class IngredienteService {
 			return new ResponseEntity<>(ingredieteLista, HttpStatus.OK);
 		}
 		return new ResponseEntity<>(listaIngrediente, HttpStatus.OK);
+	}
+
+	public ResponseEntity<?> put(Ingrediente ingrediente) {
+		Optional<Ingrediente> ingredienteBusca = ingredienteRepository.findById(ingrediente.getId());
+		if (ingredienteBusca.isPresent()) {
+			if(ingrediente.getValor() != 0){
+				ingredienteBusca.get().setValor(ingrediente.getValor());
+			}
+			if(ingrediente.getAdicional() != ingredienteBusca.get().getAdicional()){
+				ingredienteBusca.get().setAdicional(ingrediente.getAdicional());
+			}
+
+			ingredienteRepository.save(ingredienteBusca.get());
+			return new ResponseEntity<Ingrediente>(ingredienteBusca.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Conta não encontrado", HttpStatus.NOT_FOUND);
 	}
 }

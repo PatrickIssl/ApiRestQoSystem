@@ -1,9 +1,6 @@
 package com.issler.patrick.QoSystem.service;
 
-import com.issler.patrick.QoSystem.entity.Categoria;
-import com.issler.patrick.QoSystem.entity.Ingrediente;
-import com.issler.patrick.QoSystem.entity.Item;
-import com.issler.patrick.QoSystem.entity.PedidoItem;
+import com.issler.patrick.QoSystem.entity.*;
 import com.issler.patrick.QoSystem.repository.CategoriaRepository;
 import com.issler.patrick.QoSystem.repository.IngredienteRepository;
 import com.issler.patrick.QoSystem.repository.ItemRepository;
@@ -141,4 +138,42 @@ public class ItemService {
 		}
 	}
 
+    public ResponseEntity<?> findAllByEmpresa(Empresa empresa) {
+		List<Item> item = itemRepository.findAllByEmpresa(empresa);
+		if (!item.isEmpty()) {
+			if(!item.isEmpty()){
+				List<Item> listaitems = new ArrayList<>();
+				for (Item itemFor: item){
+					if (itemFor.getIngredientes() != null){
+						List<Ingrediente> listaIngredientes = new ArrayList<>();
+						for (Ingrediente ingredite: itemFor.getIngredientes()){
+							ingredite.setItems(null);
+							listaIngredientes.add(ingredite);
+						}
+						itemFor.setIngredientes(listaIngredientes);
+						listaitems.add(itemFor);
+					}
+				}
+				return new ResponseEntity<>(listaitems, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(item, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Lista de items vazio para essa emperesa", HttpStatus.NOT_FOUND);
+		}
+    }
+
+	public ResponseEntity<?> put(Item item) {
+		Optional<Item> itemBusca = itemRepository.findById(item.getId());
+		if (itemBusca.isPresent()) {
+			if(item.getNome() != null && !item.getNome().equals("")){
+				itemBusca.get().setNome(item.getNome());
+			}
+			if(item.getValor() != 0){
+				itemBusca.get().setValor(item.getValor());
+			}
+			itemRepository.save(itemBusca.get());
+			return new ResponseEntity<Item>(itemBusca.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<>("Conta não encontrado", HttpStatus.NOT_FOUND);
+	}
 }

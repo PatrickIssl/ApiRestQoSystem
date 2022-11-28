@@ -65,4 +65,6 @@ public class CategoriaService {
 		return new ResponseEntity<>(categoriaRepository.findAll(), HttpStatus.OK);
 	}
 
+
+
 }

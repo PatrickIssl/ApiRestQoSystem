@@ -53,4 +53,9 @@ public class IngredienteController {
 		return service.findAllByEmpresa(empresa);
 	}
 
+	@RequestMapping(value = "/editar", method = RequestMethod.PUT)
+	public ResponseEntity<?> Put(@Valid @RequestBody Ingrediente ingrediente) {
+		return service.put(ingrediente);
+	}
+
 }
