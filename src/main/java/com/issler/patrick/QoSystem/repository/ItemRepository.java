@@ -13,6 +13,6 @@ import com.issler.patrick.QoSystem.entity.Item;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
 	List<Item> findAllByCategoria(Categoria categoria);
-	List<Item> findAllByEmpresa(Empresa empresa);
+	List<Item> findAllByCategoriaEmpresa(Empresa empresa);
 
 }

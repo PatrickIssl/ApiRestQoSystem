@@ -49,7 +49,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/buscar/empresa", method = RequestMethod.POST)
-	public ResponseEntity<?> FindALL(@RequestBody Empresa empresa) {
+	public ResponseEntity<?> findAllByEmpresa(@RequestBody Empresa empresa) {
 		return service.findAllByEmpresa(empresa);
 	}
 

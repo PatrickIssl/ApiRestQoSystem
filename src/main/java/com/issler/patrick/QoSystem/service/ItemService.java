@@ -1,10 +1,7 @@
 package com.issler.patrick.QoSystem.service;
 
 import com.issler.patrick.QoSystem.entity.*;
-import com.issler.patrick.QoSystem.repository.CategoriaRepository;
-import com.issler.patrick.QoSystem.repository.IngredienteRepository;
-import com.issler.patrick.QoSystem.repository.ItemRepository;
-import com.issler.patrick.QoSystem.repository.PedidoItemRepository;
+import com.issler.patrick.QoSystem.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +24,9 @@ public class ItemService {
 	PedidoItemRepository pedidoItemRepository;
 	@Autowired
 	IngredienteRepository ingredienteRepository;
+
+	@Autowired
+	EmpresaRepository empresaRepository;
 
 	public ResponseEntity<String> delete(Item items) {
 		Optional<Item> item = itemRepository.findById(items.getId());
@@ -139,28 +139,32 @@ public class ItemService {
 	}
 
     public ResponseEntity<?> findAllByEmpresa(Empresa empresa) {
-		List<Item> item = itemRepository.findAllByEmpresa(empresa);
-		if (!item.isEmpty()) {
-			if(!item.isEmpty()){
-				List<Item> listaitems = new ArrayList<>();
-				for (Item itemFor: item){
-					if (itemFor.getIngredientes() != null){
-						List<Ingrediente> listaIngredientes = new ArrayList<>();
-						for (Ingrediente ingredite: itemFor.getIngredientes()){
-							ingredite.setItems(null);
-							listaIngredientes.add(ingredite);
+		Optional<Empresa> empresaBusca = empresaRepository.findById(empresa.getId());
+		if (empresaBusca.isPresent()) {
+			List<Item> item = itemRepository.findAllByCategoriaEmpresa(empresaBusca.get());
+			if (!item.isEmpty()) {
+				if (!item.isEmpty()) {
+					List<Item> listaitems = new ArrayList<>();
+					for (Item itemFor : item) {
+						if (itemFor.getIngredientes() != null) {
+							List<Ingrediente> listaIngredientes = new ArrayList<>();
+							for (Ingrediente ingredite : itemFor.getIngredientes()) {
+								ingredite.setItems(null);
+								listaIngredientes.add(ingredite);
+							}
+							itemFor.setIngredientes(listaIngredientes);
+							listaitems.add(itemFor);
 						}
-						itemFor.setIngredientes(listaIngredientes);
-						listaitems.add(itemFor);
 					}
+					return new ResponseEntity<>(listaitems, HttpStatus.OK);
 				}
-				return new ResponseEntity<>(listaitems, HttpStatus.OK);
-			}
-			return new ResponseEntity<>(item, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Lista de items vazio para essa emperesa", HttpStatus.NOT_FOUND);
-		}
-    }
+				return new ResponseEntity<>(item, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("Lista de items vazio para essa emperesa", HttpStatus.NOT_FOUND);
+			}}
+		return new ResponseEntity<>("Empresa não encontrada", HttpStatus.NOT_FOUND);
+	}
+
 
 	public ResponseEntity<?> put(Item item) {
 		Optional<Item> itemBusca = itemRepository.findById(item.getId());
